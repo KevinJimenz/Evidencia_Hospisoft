@@ -1,0 +1,28 @@
+{
+  "name": "hospisoft",
+  "version": "1.0.0",
+  "description": "proyecto de gestion general Hospisoft",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinJimenz/Evidencia_Hospisoft.com.git"
+  },
+  "keywords": [
+    "Hospisoft-Proyecto"
+  ],
+  "author": "Juan David Montoya, Kevin Camilo Jimenez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinJimenz/Evidencia_Hospisoft.com/issues"
+  },
+  "homepage": "https://github.com/KevinJimenz/Evidencia_Hospisoft.com#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "mysql2": "^3.9.2",
+    "nodemon": "^3.1.0"
+  }
+}
