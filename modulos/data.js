@@ -1,10 +1,10 @@
 const mysql = require('mysql2');
 
 const conexion = mysql.createConnection({
-host: 'localhost',
-user: 'root',
-password: '',
-database: 'hospisoft'
+  host: "localhost",
+  user : "root",
+  password: "",
+  database: "hospisoft"
 
 
 })
