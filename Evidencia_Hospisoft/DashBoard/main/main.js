@@ -7,7 +7,7 @@
       new bootstrap.Tooltip(tooltipTriggerEl)
     })
   })
-  // Grafico 1 
+  // Grafico 1 y Grafico 2
   let EneroInicio = new Date("2024-01-01")
   let EneroFin= new Date("2024-01-31")
   let FebreroInicio = new Date("2024-02-01")
@@ -124,22 +124,19 @@
     if(cont2 > 0)
     {
         datosGrafico1.push(cont2)
-    }
-    else{
+    }else{
         datosGrafico1.push(0)
     }
     if(cont3 > 0)
     {
         datosGrafico1.push(cont3)
-    }
-    else{
+    }else{
         datosGrafico1.push(0)
     }
     if(cont4 > 0)
     {
         datosGrafico1.push(cont4)
-    }
-    else{
+    }else{
         datosGrafico1.push(0)
     }
     if(cont5 > 0)
@@ -342,7 +339,7 @@
                     ],
                     borderColor: 'black',
                     borderWidth: 1,
-                    data: [0,10,20,30,40,50,60,70,80,90,100,110],
+                    data:[cont1,cont2,cont3,cont4,cont5,cont6,cont7,cont8,cont9,cont10,cont11,cont12] ,
 
                 }]
             },
@@ -405,43 +402,138 @@ toggle.addEventListener('click',()=>{
  */
 let btnDescargar = document.getElementById('descargar')
 btnDescargar.addEventListener('click', ()=>{
-    datosGrafico1.forEach(element => {
-        console.log(element)
-    });
     var graficaSelect = option.value
     if(graficaSelect == 1)
     {
        const values = [
-        /**
-         * Cabeceras
-         */
-        {x: chart1.data.labels},
-        /**
-         * Datos
-         */
-        {y: datosGrafico1}
+        {x: chart1.data.labels, y: datosGrafico1}
        ];
+      
        /**
+         * Creo un libro de Excel
+         */
+       const workbook = XLSX.utils.book_new()
+        /**
         * Convertir los datos en datos legibles para la libreria
         * SheetJs
         */
         const data = values.map(item => [item.x , item.y])
-        /**
-         * Creo un libro de Excel
-         */
-        const workbook = XLSX.utils.book_new()
         /** 
          * Creo un hoja y agrego los datos
          * */
-        const worksheet = XLSX.utils.aoa_to_sheet(['X','Y'],
-        )
+        const worksheet = XLSX.utils.aoa_to_sheet([
+            data[0][0],
+            data[0][1]
+        ])
         /**
          * Agrego la hoja al libro
          */
         XLSX.utils.book_append_sheet(workbook,worksheet,'Datos')
         /**
-         * Descargo el ibro
+         * Descargo el libro
          */
+     
         XLSX.writeFile(workbook, 'Datos_Grafico_1.xlsx')
     }
+    if(graficaSelect == 2)
+    {
+        const values = [
+            {x: chart2.data.labels, y: valores}
+           ];
+          
+           /**
+             * Creo un libro de Excel
+             */
+           const workbook = XLSX.utils.book_new()
+            /**
+            * Convertir los datos en datos legibles para la libreria
+            * SheetJs
+            */
+            const data = values.map(item => [item.x , item.y])
+            /** 
+             * Creo un hoja y agrego los datos
+             * */
+            const worksheet = XLSX.utils.aoa_to_sheet([
+                data[0][0],
+                data[0][1]
+            ])
+            /**
+             * Agrego la hoja al libro
+             */
+            XLSX.utils.book_append_sheet(workbook,worksheet,'Datos')
+            /**
+             * Descargo el libro
+             */
+         
+            XLSX.writeFile(workbook, 'Datos_Grafico_2.xlsx')
+    }
+    if(graficaSelect == 3)
+    {
+        const values = [
+            {x: chart3.data.labels, y: datosGrafico1}
+           ];
+          
+           /**
+             * Creo un libro de Excel
+             */
+           const workbook = XLSX.utils.book_new()
+            /**
+            * Convertir los datos en datos legibles para la libreria
+            * SheetJs
+            */
+            const data = values.map(item => [item.x , item.y])
+            /** 
+             * Creo un hoja y agrego los datos
+             * */
+            const worksheet = XLSX.utils.aoa_to_sheet([
+                data[0][0],
+                data[0][1]
+            ])
+            /**
+             * Agrego la hoja al libro
+             */
+            XLSX.utils.book_append_sheet(workbook,worksheet,'Datos')
+            /**
+             * Descargo el libro
+             */
+         
+            XLSX.writeFile(workbook, 'Datos_Grafico_3.xlsx')
+    }
+    
 })
+
+/**
+ * *Contenido de los CRUD
+ */
+// ? dates
+$(document).ready(function(){
+    $(".dates").click(function(){
+      $(this).toggleClass("active");
+      var content = $(this).next(".content_dates");
+      content.slideToggle(300);
+    });
+  });
+// ? Doctors 
+$(document).ready(function(){
+    $(".doctors").click(function(){
+      $(this).toggleClass("active");
+      var content = $(this).next(".content_doctors");
+      content.slideToggle(300);
+    });
+  });
+  // ? Medicine 
+  $(document).ready(function(){
+    $(".medicine").click(function(){
+      $(this).toggleClass("active");
+      var content = $(this).next(".content_medicine");
+      content.slideToggle(300);
+    });
+  });
+  // ? Patient
+  $(document).ready(function(){
+    $(".patient").click(function(){
+      $(this).toggleClass("active");
+      var content = $(this).next(".content_patient");
+      content.slideToggle(300);
+    });
+  });
