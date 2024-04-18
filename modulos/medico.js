@@ -76,7 +76,7 @@ res.status(200).send({
         }
     })
 })
-medico.post("/medico/crearMedico", (req,res)=>{
+medico.post("/medico/crearMedico/:nombre/:apellido/:note/:idPerson", (req,res)=>{
    let form = req.body;
 conexion.query("INSERT INTO medicos SET ?",form,(error,resultado)=>{
     

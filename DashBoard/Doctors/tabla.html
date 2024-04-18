@@ -20,7 +20,8 @@
     <!-- Custom styles for this template -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
-
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link  href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="../../assets/dist/css/sb-admin-2.min.css" rel="stylesheet">
@@ -31,7 +32,6 @@
     <link href="../../vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="../../vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="../../vendor/simple-datatables/style.css" rel="stylesheet">
-
     <!-- Custom styles for this page -->
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="doctor.css">
@@ -58,7 +58,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="../main/index.html">
+                <a class="nav-link" href="../main/main.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Graphic</span></a>
             </li>
@@ -78,9 +78,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components </h6>
                         <a class="collapse-item" href="../appointment/add.html">Add</a>
-                        <a class="collapse-item" href="../appointment/edit.html">Edit</a>
-                        <a class="collapse-item" href="../appointment/delete.html">Delete</a>
-                        <a class="collapse-item" href="../appointment/consult.html">Consult</a>
+                        <a class="collapse-item" href="../appointment/table.html">Table</a>
                     </div>
                 </div>
             </li>
@@ -93,10 +91,8 @@
                 <div id="collapseUtilities" class="collapse content_doctors">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components </h6>
-                        <a class="collapse-item" href="../Doctors/add.html">Add</a>
-                        <a class="collapse-item" href="../Doctors/edit.html">Edit</a>
-                        <a class="collapse-item" href="../Doctors/delete.html">Delete</a>
-                        <a class="collapse-item" href="../Doctors/consult.html">Consult</a>
+                        <a class="collapse-item" href="../Doctors/add.htmld">Add</a>
+                        <a class="collapse-item" href="../Doctors/tabla.html">Table</a>
                     </div>
                 </div>
             </li>
@@ -200,15 +196,69 @@
                         <div class="card-header py-3"></div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <h2>Consult Doctor</h2>
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Id</label>
-                                        <input type="text" class="form-control" id="id" aria-describedby="emailHelp">
-                                      </div>
-                                      <button type="button" id="btn" class="btn btn-primary">Consult</button>
-                                  </form>
-                              <br>
+                                <h2 class="pt-3 pb-4 " style="color: rgb(146, 146, 146);">Edit Doctors</h2>
+                                <table id="tabla" class="table table-striped" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="bg-dark text-light">Nombre</th>
+                                            <th class="bg-dark text-light">Apellido</th>
+                                            <th class="bg-dark text-light">Email</th>
+                                            <th class="bg-dark text-light">Especialidad</th>
+                                            <th class="bg-warning text-light text-center">Edit</th>
+                                            <th class="bg-danger text-light text-center">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="datos">
+                                        <tr>
+                                            <td>Tiger Nixon</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Garrett Winters</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>63</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ashton Cox</td>
+                                            <td>Junior Technical Author</td>
+                                            <td>San Francisco</td>
+                                            <td>66</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cedric Kelly</td>
+                                            <td>Senior Javascript Developer</td>
+                                            <td>Edinburgh</td>
+                                            <td>22</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Airi Satou</td>
+                                            <td>Accountant</td>
+                                            <td>Tokyo</td>
+                                            <td>33</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Brielle Williamson</td>
+                                            <td>Integration Specialist</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                            <td>New York</td>
+                                            <td>61</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -257,6 +307,10 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../vendor/apexcharts/apexcharts.min.js"></script>
     <script src="../../vendor/chart.js/chart.umd.js"></script>
@@ -286,7 +340,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-to-blob/4.1.0/canvas-to-blob.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
- 
     <script src="./doctor.js"></script>
   
 </body>
