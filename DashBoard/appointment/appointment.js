@@ -6,6 +6,9 @@
     })
   })()
 
+  new DataTable( '#tabla', {
+  
+} );
   
 var elementoVisible = true;
 let toggle = document.getElementById('sidebarToggle')

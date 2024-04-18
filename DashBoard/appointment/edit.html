@@ -34,7 +34,7 @@
 
     <!-- Custom styles for this page -->
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="appointment.css">
+    <link rel="stylesheet" href="main.css">
 </head>
 
 <body id="page-top">
@@ -58,7 +58,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="../main/index.html">
+                <a class="nav-link" href="main.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Graphic</span></a>
             </li>
@@ -78,9 +78,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components </h6>
                         <a class="collapse-item" href="../appointment/add.html">Add</a>
-                        <a class="collapse-item" href="../appointment/edit.html">Edit</a>
-                        <a class="collapse-item" href="../appointment/delete.html">Delete</a>
-                        <a class="collapse-item" href="../appointment/consult.html">Consult</a>
+                        <a class="collapse-item" href="../appointment/table.html">Table</a>
+
                     </div>
                 </div>
             </li>
@@ -200,38 +199,46 @@
                         <div class="card-header py-3"></div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <h2>Edit Appointment</h2>
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Id</label>
-                                        <input type="text" class="form-control" id="id" aria-describedby="emailHelp">
-                                      </div>
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Description</label>
-                                      <input type="text" class="description form-control" id="des" aria-describedby="emailHelp">
+                                <div class="row">
+                                    
+                                    <div class="col-2">
+                                        Seleccione una grafica
                                     </div>
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Direction</label>
-                                      <input type="text" class="form-control" id="direction" aria-describedby="emailHelp">
-                                    </div>  <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Fecha</label>
-                                      <input type="date" class="form-control" id="date" aria-describedby="emailHelp">
+                                   
+                                    <div class="col-4">
+                                      
+                                        <select name="" id="select" class="selectGrafic">
+                                            <option value="0"> </option>
+                                            <option value="1" id="grafico">Pacientes</option>
+                                            <option value="2" id="grafico">Medicos</option>
+                                            <option value="3" id="grafico">Facturaciones</option>
+                                        </select>
                                     </div>
-                                    <div class="row">
-                                        <div class="mb-3 col-6">
-                                            <label for="exampleInputEmail1" class="form-label">Person</label>
-                                            <Select class="person" id="person"> </Select>
-                                          </div>
-                                          <div class="mb-3 col-6">
-                                            <label for="exampleInputEmail1" class="form-label">Doctor</label>
-                                            <Select class="doctor" id="doctor"> </Select>
-                                          </div>
+                                    <div class="col-4" id="contenedorMes" style="visibility: hidden;">
+                                        Seleccione un mes
+                                        <select id="selectMeses" class="selectMonth">
+                                            <option value=""> </option>
+                                            <option value="1" id="">Enero</option>
+                                            <option value="2" id="">Febrero</option>
+                                            <option value="3" id="">Marzo</option>
+                                            <option value="4" id="">Abril</option>
+                                            <option value="5" id="">Mayo</option>
+                                            <option value="6" id="">Junio</option>
+                                            <option value="7" id="">Julio</option>
+                                            <option value="8" id="">Agosto</option>
+                                            <option value="9" id="">Septiembre</option>
+                                            <option value="10" id="">Octubre</option>
+                                            <option value="11" id="">Noviembre</option>
+                                            <option value="12" id="">Diciembre</option>
+                                 </select>
                                     </div>
-                               
-                                  
-                                  <button type="button" id="btn" class="btn btn-success">Agregar</button>
-                              </form>
-                              <br>
+                                    <div class="col-2">
+                                        <button type="button" id="descargar" class="btn btn-success" style="background-color: #7AB730; border-color: #7AB730;">Descargar</button>
+                                    </div>
+                                </div>
+                                 <hr class="sidebar-divider d-none d-md-block">
+                                 
+                                    <canvas id="lineChart"  height="110" ></canvas>
                             </div>
                         </div>
                     </div>
@@ -309,9 +316,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-to-blob/4.1.0/canvas-to-blob.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
- 
-    <script src="./appointment.js"></script>
-  
+   
+    <script src="main.js"></script>
 </body>
 
 </html>
