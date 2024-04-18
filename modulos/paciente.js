@@ -19,6 +19,7 @@ paciente.get("/paciente/mostrarPacientes",(req,res) => {
 
 })
 });
+
 paciente.get("/paciente/mostrarPaciente/:idPaciente",(req,res) => {
    
     let idPaciente = req.params.idPaciente;
