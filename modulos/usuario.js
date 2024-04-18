@@ -1,6 +1,7 @@
 const express = require('express');
 const usuario = express.Router();
 const conexion = require("./data");
+const bcrypt = require('bcrypt');
 
 
 usuario.get("/usuario/MostrarUsuarios",(req,res) => {
@@ -23,6 +24,25 @@ usuario.get("/usuario/MostrarUsuario/:idUser",(req,res) => {
     console.log(req.params.idUser)
     let idUser = req.params.idUser;
     let consulta = "select * from users where idUser = "+idUser;
+    conexion.query(consulta,(error,resultado)=>{
+        try{
+            res.status(200).send(resultado)
+        }
+        catch(error){
+            res.status(400).send({
+                "status": "error",
+                "message": "Error al Mostrar el usuario",
+            })
+        }
+
+})
+});
+
+usuario.get("/usuario/MostrarUsuario/:email/:password",(req,res) => {
+    
+    let email = req.params.email;
+    let password = req.params.password;
+    let consulta = "select emailUser, password from users where emailUser= '"+email+"' and password = '"+password+"';" ;
     conexion.query(consulta,(error,resultado)=>{
         try{
             res.status(200).send(resultado)
@@ -77,26 +97,47 @@ res.status(200).send({
 
 
 usuario.post("/usuario/crearUsuario", (req,res)=>{
-    console.log(req.body.idUser,
+    let pass = req.body.password
 
-        req.body.userName,req.body.emailUser,req.body.password);
-conexion.query("INSERT INTO users VALUES (?, ?, ?,?)",[req.body.idUser,
-req.body.userName,req.body.emailUser,req.body.password],(error,resultado)=>{
     
 
-    try{
-        res.status(200).send({
-            "message": "Usuario Creado"
-        })
-    }
-    catch(error){
-        res.status(400).send({
-            "status": "error",
-            "message": "Error al crear usuario"
-        })
-    }
-})
+   
+        conexion.query("INSERT INTO users VALUES (?, ?, ?,?)",[req.body.idUser,
+            req.body.userName,req.body.emailUser,pass],(error,resultado)=>{
+                
+            
+                if(res.status(200)){
+            
+                    res.send({
+                        "message": "Usuario Creado"
+                    })
+                }
+                else{
+            
+                    res.send({
+                        "status": "error",
+                        "message": "Error al crear usuario"
+                    })
+                }
+                   
+                })
+     
+    
+
+    
+   
+   
+    
+
+
+
 
 })
+
+
+
+
+
+
 
 module.exports = usuario;

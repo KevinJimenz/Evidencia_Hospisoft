@@ -19,7 +19,25 @@ paciente.get("/paciente/mostrarPacientes",(req,res) => {
 
 })
 });
+paciente.get("/paciente/MostrarPacientes/:email/:password",(req,res) => {
+    
+    let email = req.params.email;
+    let password = req.params.password;
+    console.log(email,password)
+    let consulta = "select emailPaciente, passwordPaciente from pacientes where emailPaciente= '"+email+"' and passwordPaciente = '"+password+"';" ;
+    conexion.query(consulta,(error,resultado)=>{
+        try{
+            res.status(200).send(resultado)
+        }
+        catch(error){
+            res.status(400).send({
+                "status": "error",
+                "message": "Error al Mostrar el usuario",
+            })
+        }
 
+})
+});
 paciente.get("/paciente/mostrarPaciente/:idPaciente",(req,res) => {
    
     let idPaciente = req.params.idPaciente;

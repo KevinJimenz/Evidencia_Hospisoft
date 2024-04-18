@@ -26,7 +26,8 @@
           <div class="col-md-7">
             <h2 style="color: #7AB730; font-weight:900; font-size: 32px; "><span style="color: black;  font-weight:500">Login To</span> <span style="color: black; " class="">HOSPI</span>SOFT</h2>
             <p class="mb-4">Health and Care, Our Commitment to You: Always by Your Side, Always in Care.</p>
-      
+
+      <form method="dialog">
               <div class="form-group first">
                 <label for="email">Correo</label>
                 <input type="email" class="form-control" placeholder="YourEmail@gmail.com" id="email">
@@ -38,7 +39,7 @@
               </div>
               
              <div class="col-12 botones mt-4 ">
-                <button type="submit" style="background-color: #7AB730; border-color: #7AB730;"  class="btn btn-block btn-primary boton">
+                <button type="submit" style="background-color: #7AB730; border-color: #7AB730;" onclick="login()" class="btn btn-block btn-primary boton">
                   Log In
                 </button>
          
@@ -46,6 +47,7 @@
                   Register
                 </button>
              </div>
+            </form>
              <br>
              <div class="col-12 text-center">
               <a style="color: blue;" href="../Vista_Paciente/Index.html">Access our website</a>
@@ -66,6 +68,7 @@
     <script src="../assets/dist/js/popper.min.js"></script>
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/dist/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   </body>
 </html>

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/KevinJimenz/Evidencia_Hospisoft.com#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "exceljs": "^4.4.0",
