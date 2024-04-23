@@ -5,8 +5,7 @@ const conexion = require("./data");
 
 medicamento.get("/medicamento/mostrarMedicamento",(req,res) => {
 
-    let consulta = "select * from medicamentos"
-    conexion.query(consulta,(error,resultado)=>{
+    conexion.query("Select idMedicamento as id, descripcion as descripcion, existencia as stock From medicamentos",(error,resultado)=>{
         try{
             res.status(200).send(resultado)
         }
@@ -38,7 +37,7 @@ medicamento.get("/medicamento/mostrarMedicamento/:idMedicamento",(req,res) => {
 
 })
 });
-medicamento.delete("/medicamento/eliminarMedicamento/:idMedicamento",(req,res) => {
+medicamento.all("/medicamento/eliminarMedicamento/:idMedicamento",(req,res) => {
     let idMedicamento= req.params.idMedicamento;
     let consulta = "delete from medicamentos where idMedicamento="+idMedicamento;
     conexion.query(consulta,(error,resultado)=>{
@@ -57,12 +56,13 @@ medicamento.delete("/medicamento/eliminarMedicamento/:idMedicamento",(req,res) =
 })
 });
 
-medicamento.put("/medicamento/editarMedicamento/:idMedicamento",(req,res)=>{
+medicamento.all("/medicamento/editarMedicamento/:idMedicamento/:descripcion/:stock",(req,res)=>{
     let idMedicamento= req.params.idMedicamento;
+    let descripcion = req.params.descripcion
+    let stock = req.params.stock
     
-    let form = req.body
    
-    conexion.query("UPDATE medicamentos SET ? WHERE idMedicamento = ?",[form,idMedicamento], (error,resultado)=>{
+    conexion.query("UPDATE medicamentos SET descripcion = '"+descripcion+"', existencia = '"+stock+"' WHERE idMedicamento = " +idMedicamento, (error,resultado)=>{
         try{
 res.status(200).send({
     "message": "Medicamento Actualizado"

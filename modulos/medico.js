@@ -1,12 +1,8 @@
 const express = require('express');
 const medico= express.Router();
 const conexion = require("./data");
-
-
-
 medico.get("/medico/mostrarMedicos",(req,res) => {
-
-    let consulta = "select * from medicos"
+    let consulta = "select idMedico as id, nombreMedico as nombre, apellidoMedico as apellido, emailMedico as email , especialidad from medicos"
     conexion.query(consulta,(error,resultado)=>{
         try{
             res.status(200).send(resultado)
@@ -17,15 +13,11 @@ medico.get("/medico/mostrarMedicos",(req,res) => {
                 "message": "Error al Mostrar Medicos",
             })
         }
-
 })
 });
 medico.get("/medico/mostrarMedico/:idMedico",(req,res) => {
-   
     let idMedico = req.params.idMedico;
     let consulta = "select * from medicos where idMedico = "+idMedico;
-
-
     conexion.query(consulta,(error,resultado)=>{
         try{
             res.status(200).send(resultado)
@@ -36,13 +28,11 @@ medico.get("/medico/mostrarMedico/:idMedico",(req,res) => {
                 "message": "Error al Mostrar el medico",
             })
         }
-
 })
 });
-medico.delete("/medico/eliminarMedico/:idMedico",(req,res) => {
+medico.all("/medico/eliminarMedico/:idMedico",(req,res) => {
     let idMedico= req.params.idMedico;
-    let consulta = "delete from medicos where idMedico="+idMedico;
-    conexion.query(consulta,(error,resultado)=>{
+    conexion.query("DELETE FROM medicos WHERE idMedico="+idMedico,(error,resultado)=>{
         try{
             res.status(200).send({
                 "message": "El medico ha sido eliminado correctamente"
@@ -54,19 +44,19 @@ medico.delete("/medico/eliminarMedico/:idMedico",(req,res) => {
                 "message": "Error al eliminar el medico",
             })
         }
-
 })
 });
-medico.put("/medico/editarMedico/:idMedico",(req,res)=>{
+medico.all("/medico/editarMedico/:idMedico/:nombre/:apellido/:email/:especialidad",(req,res)=>{
     let idMedico= req.params.idMedico;
-    
-    let form = req.body
-   
-    conexion.query("UPDATE medicos SET ? WHERE idMedico = ?",[form,idMedico], (error,resultado)=>{
+    let nombre= req.params.nombre;
+    let apellido= req.params.apellido;
+    let email= req.params.email;
+    let especialidad= req.params.especialidad;
+    conexion.query("UPDATE medicos SET nombreMedico = '"+nombre+"', apellidoMedico = '"+apellido+"', emailMedico = '"+email+"', especialidad = '"+especialidad+"' WHERE idMedico ="+ idMedico, (error,resultado)=>{
         try{
-res.status(200).send({
-    "message": "Medico Actualizado"
-})
+        res.status(200).send({
+            "message": "Medico Actualizado"
+        })
         }
         catch(error){
             res.status(200).send({
@@ -76,11 +66,12 @@ res.status(200).send({
         }
     })
 })
-medico.post("/medico/crearMedico/:nombre/:apellido/:note/:idPerson", (req,res)=>{
-   let form = req.body;
-conexion.query("INSERT INTO medicos SET ?",form,(error,resultado)=>{
-    
-
+medico.all("/medico/crearMedico/:nombre/:apellido/:email/:especialidad", (req,res)=>{
+    let nombre = req.params.nombre
+    let apellido = req.params.apellido
+    let email = req.params.email
+    let especialidad = req.params.especialidad
+    conexion.query("INSERT INTO medicos VALUEs ('','"+nombre+"','"+apellido+"', '"+email+"' , '"+especialidad+"')",(error,resultado)=>{
     try{
         res.status(200).send({
             "message": "Medico Creado"
@@ -93,6 +84,5 @@ conexion.query("INSERT INTO medicos SET ?",form,(error,resultado)=>{
         })
     }
 })
-
 })
 module.exports = medico;

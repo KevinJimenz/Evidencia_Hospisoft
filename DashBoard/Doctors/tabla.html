@@ -91,7 +91,7 @@
                 <div id="collapseUtilities" class="collapse content_doctors">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components </h6>
-                        <a class="collapse-item" href="../Doctors/add.htmld">Add</a>
+                        <a class="collapse-item" href="../Doctors/add.html">Add</a>
                         <a class="collapse-item" href="../Doctors/tabla.html">Table</a>
                     </div>
                 </div>
@@ -106,9 +106,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components </h6>
                         <a class="collapse-item" href="../Medicine/add.html">Add</a>
-                        <a class="collapse-item" href="../Medicine/edit.html">Edit</a>
-                        <a class="collapse-item" href="../Medicine/delete.html">Delete</a>
-                        <a class="collapse-item" href="../Medicine/consult.html">Consult</a>
+                        <a class="collapse-item" href="../Medicine/tabla.html">Table</a>
                     </div>
                 </div>
             </li>
@@ -200,6 +198,7 @@
                                 <table id="tabla" class="table table-striped" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th class="bg-dark text-light">Id</th>
                                             <th class="bg-dark text-light">Nombre</th>
                                             <th class="bg-dark text-light">Apellido</th>
                                             <th class="bg-dark text-light">Email</th>
@@ -209,56 +208,37 @@
                                         </tr>
                                     </thead>
                                     <tbody id="datos">
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>Edinburgh</td>
-                                            <td>22</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Airi Satou</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Brielle Williamson</td>
-                                            <td>Integration Specialist</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                            <td>New York</td>
-                                            <td>61</td>
-                                        </tr>
+                                       
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card shadow mb-4" id="form" style="visibility: hidden;">
+                        <div class="card-header py-3"></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <form >
+                                    <input type="text" class="form-control" style="visibility: hidden;" id="id" aria-describedby="emailHelp">
+                                    <div class="mb-3">
+                                      <label for="exampleInputEmail1"  class="form-label">Nombre</label>
+                                      <input type="text" class="form-control"  id="name" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Apellido</label>
+                                      <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp">
+                                    </div>  
+                                    <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Email</label>
+                                      <input type="text" class="form-control" id="email" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Especialidad</label>
+                                        <input type="text" class="form-control" id="especialidad" aria-describedby="emailHelp">
+                                    </div> 
+                                  <button type="button" id="btnEditarDoctor"  class="btn btn-success">Edit</button>
+                              </form>
                             </div>
                         </div>
                     </div>
@@ -341,7 +321,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="./doctor.js"></script>
-  
+    <script src="./controladores/editDoctor.js"></script>
 </body>
 
 </html>

@@ -106,8 +106,8 @@
                 <div id="collapseUtilities" class="collapse content_medicine">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components </h6>
-                        <a class="collapse-item" href="../appointment/add.html">Add</a>
-                        <a class="collapse-item" href="../appointment/table.html">Table</a>
+                        <a class="collapse-item" href="../Medicine/add.html">Add</a>
+                        <a class="collapse-item" href="../Medicine/tabla.html">Table</a>
                     </div>
                 </div>
             </li>
@@ -185,29 +185,21 @@
                                 <h2>Add Doctor</h2>
                                 <form>
                                     <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Description</label>
-                                      <input type="text" class="description form-control" id="des" aria-describedby="emailHelp">
+                                      <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                                      <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
                                     </div>
                                     <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Direction</label>
-                                      <input type="text" class="form-control" id="direction" aria-describedby="emailHelp">
+                                      <label for="exampleInputEmail1" class="form-label">Apellido</label>
+                                      <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp">
                                     </div>  <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Fecha</label>
-                                      <input type="date" class="form-control" id="date" aria-describedby="emailHelp">
+                                      <label for="exampleInputEmail1" class="form-label">Correo</label>
+                                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
                                     </div>
-                                    <div class="row">
-                                        <div class="mb-3 col-6">
-                                            <label for="exampleInputEmail1" class="form-label">Person</label>
-                                            <Select class="person" id="person"> </Select>
-                                          </div>
-                                          <div class="mb-3 col-6">
-                                            <label for="exampleInputEmail1" class="form-label">Doctor</label>
-                                            <Select class="doctor" id="doctor"> </Select>
-                                          </div>
+                                   <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Especialidad</label>
+                                        <input type="text" class="form-control" id="espe" aria-describedby="emailHelp">
                                     </div>
-                               
-                                  
-                                  <button type="button" id="btn" class="btn btn-success">Agregar</button>
+                                  <button type="button" id="btnAgregar" class="btn btn-primary">Agregar</button>
                               </form>
                               <br>
                             </div>
@@ -289,7 +281,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
  
     <script src="./doctor.js"></script>
-  
+    <script src="../Doctors/controladores/addDoctor.js"></script>
+    
 </body>
 
 </html>
