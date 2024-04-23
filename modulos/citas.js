@@ -51,5 +51,7 @@ citas.get("/citas/mostrarPacienteId/:idPaciente",(req,res) => {
 
 })
 });
+//mostrar citas
+
 
 module.exports = citas

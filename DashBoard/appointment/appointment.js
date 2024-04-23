@@ -62,3 +62,8 @@ $(document).ready(function(){
     content.slideToggle(300);
   });
 });
+
+
+let tbdoy = document.getElementById('datos')
+
+fetch("")
