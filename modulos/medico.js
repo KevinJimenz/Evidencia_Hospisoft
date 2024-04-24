@@ -71,7 +71,7 @@ medico.all("/medico/crearMedico/:nombre/:apellido/:email/:especialidad", (req,re
     let apellido = req.params.apellido
     let email = req.params.email
     let especialidad = req.params.especialidad
-    conexion.query("INSERT INTO medicos VALUEs ('','"+nombre+"','"+apellido+"', '"+email+"' , '"+especialidad+"')",(error,resultado)=>{
+    conexion.query("INSERT INTO medicos VALUES ('','"+nombre+"','"+apellido+"', '"+email+"' , '"+especialidad+"')",(error,resultado)=>{
     try{
         res.status(200).send({
             "message": "Medico Creado"
