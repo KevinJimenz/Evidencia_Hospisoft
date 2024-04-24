@@ -1,0 +1,870 @@
+{
+	"info": {
+		"_postman_id": "eb2d68c4-f466-412f-917e-67423609fe74",
+		"name": "Hospisoft Pruebas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31398577"
+	},
+	"item": [
+		{
+			"name": "crear usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUser\": 1113865899,\r\n    \"userName\": \"juancho\",\r\n    \"emailUser\": \"juancho@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuario/crearUsuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"crearUsuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mostrar usuario por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/usuario/MostrarUsuario/:idUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"MostrarUsuario",
+						":idUser"
+					],
+					"variable": [
+						{
+							"key": "idUser",
+							"value": "1113865899"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar usuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"idUser\": 12345678,\r\n        \"userName\": \"kevin\",\r\n        \"emailUser\": \"kevin@gmail.com\",\r\n        \"password\": \"12345\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuario/editarUsuario/:idUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"editarUsuario",
+						":idUser"
+					],
+					"variable": [
+						{
+							"key": "idUser",
+							"value": "12345678"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pacientes Atendidos al mes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/citas/pacientesAtendidos/:month/:year",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"citas",
+						"pacientesAtendidos",
+						":month",
+						":year"
+					],
+					"variable": [
+						{
+							"key": "month",
+							"value": "03"
+						},
+						{
+							"key": "year",
+							"value": "2024"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EliminarUsuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/usuario/eliminarUsuario/:idUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"eliminarUsuario",
+						":idUser"
+					],
+					"variable": [
+						{
+							"key": "idUser",
+							"value": "1229339203"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CrearPaciente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idPaciente\": 22323,\r\n    \"nombrePaciente\": \"3p33p\",\r\n    \"apellidoPaciente\": \"juancho@gmail.com\",\r\n    \"emailPaciente\": \"123@pepe\",\r\n    \"telefonoPaciente\": \"223233\",\r\n    \"movilPaciente\": \"123\",\r\n    \"fechaNacimiento\": \"2024/03/12\",\r\n    \"epsPaciente\":\"pepeeps\",\r\n    \"usuarioPaciente\": 1113865899,\r\n    \"passwordPaciente\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/paciente/crearPaciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"paciente",
+						"crearPaciente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Medico con mas citas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7f67fbba91001812c960d792bab0ea8005d349dc440f0bc60e9100337ab2750d",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n\"rues\": true,\r\n\r\n\"identification_number\": 890900608\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/citas/medicosConsultas/:month/:year",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"citas",
+						"medicosConsultas",
+						":month",
+						":year"
+					],
+					"variable": [
+						{
+							"key": "month",
+							"value": "03"
+						},
+						{
+							"key": "year",
+							"value": "2024"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Facturacion de citas al mes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/citas/facturacionCitasMes/:month/:year",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"citas",
+						"facturacionCitasMes",
+						":month",
+						":year"
+					],
+					"variable": [
+						{
+							"key": "month",
+							"value": "03"
+						},
+						{
+							"key": "year",
+							"value": "2024"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar citas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/citas/mostrarCitas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"citas",
+						"mostrarCitas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar cita por paciente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCita\": 9,\r\n    \"descripcion\": \"Prueba\",\r\n    \"direccion\": \"pasillo 2\",\r\n    \"fecha\": \"2024-03-01\",\r\n    \"id_Paciente\": 2,\r\n    \"id_Medico\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/citas/crearCIta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"citas",
+						"crearCIta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CrearCitas",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCita\": 9,\r\n    \"descripcion\": \"Prueba\",\r\n    \"direccion\": \"pasillo 2\",\r\n    \"fecha\": \"2024-03-01\",\r\n    \"id_Paciente\": 2,\r\n    \"id_Medico\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/citas/crearCIta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"citas",
+						"crearCIta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verificarCita",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/citas/verificarCita/:horaInicio/:horaFin/:fecha",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"citas",
+						"verificarCita",
+						":horaInicio",
+						":horaFin",
+						":fecha"
+					],
+					"variable": [
+						{
+							"key": "horaInicio",
+							"value": ""
+						},
+						{
+							"key": "horaFin",
+							"value": ""
+						},
+						{
+							"key": "fecha",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mostrar usuario email y password",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/usuario/MostrarUsuario/:email/:password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuario",
+						"MostrarUsuario",
+						":email",
+						":password"
+					],
+					"variable": [
+						{
+							"key": "email",
+							"value": ""
+						},
+						{
+							"key": "password",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mostrar medicamentos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/medicamento/mostrarMedicamento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medicamento",
+						"mostrarMedicamento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mostrar paciente email y password",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/paciente/MostrarPacientes/:email/:password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"paciente",
+						"MostrarPacientes",
+						":email",
+						":password"
+					],
+					"variable": [
+						{
+							"key": "email",
+							"value": "veneconeco@gmail.com"
+						},
+						{
+							"key": "password",
+							"value": "1E11331"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar medicamento por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/medicamento/mostrarMedicamento/:idMedicamento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medicamento",
+						"mostrarMedicamento",
+						":idMedicamento"
+					],
+					"variable": [
+						{
+							"key": "idMedicamento",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Medicamento por id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/medicamento/eliminarMedicamento/:idMedicamento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medicamento",
+						"eliminarMedicamento",
+						":idMedicamento"
+					],
+					"variable": [
+						{
+							"key": "idMedicamento",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Medicamento",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/medicamento/editarMedicamento/:idMedicamento/:descripcion/:stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medicamento",
+						"editarMedicamento",
+						":idMedicamento",
+						":descripcion",
+						":stock"
+					],
+					"variable": [
+						{
+							"key": "idMedicamento",
+							"value": ""
+						},
+						{
+							"key": "descripcion",
+							"value": ""
+						},
+						{
+							"key": "stock",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Medicamento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/medicamento/crearMedicamento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medicamento",
+						"crearMedicamento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar medicos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/medico/mostrarMedicos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medico",
+						"mostrarMedicos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar medico por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/medico/mostrarMedico/:idMedico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medico",
+						"mostrarMedico",
+						":idMedico"
+					],
+					"variable": [
+						{
+							"key": "idMedico",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar medico",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/medico/eliminarMedico/:idMedico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medico",
+						"eliminarMedico",
+						":idMedico"
+					],
+					"variable": [
+						{
+							"key": "idMedico",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear medico",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/medico/crearMedico/:nombre/:apellido/:email/:especialidad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medico",
+						"crearMedico",
+						":nombre",
+						":apellido",
+						":email",
+						":especialidad"
+					],
+					"variable": [
+						{
+							"key": "nombre",
+							"value": ""
+						},
+						{
+							"key": "apellido",
+							"value": ""
+						},
+						{
+							"key": "email",
+							"value": ""
+						},
+						{
+							"key": "especialidad",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar medico",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/medico/editarMedico/:idMedico/:nombre/:apellido/:email/:especialidad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"medico",
+						"editarMedico",
+						":idMedico",
+						":nombre",
+						":apellido",
+						":email",
+						":especialidad"
+					],
+					"variable": [
+						{
+							"key": "idMedico",
+							"value": ""
+						},
+						{
+							"key": "nombre",
+							"value": ""
+						},
+						{
+							"key": "apellido",
+							"value": ""
+						},
+						{
+							"key": "email",
+							"value": ""
+						},
+						{
+							"key": "especialidad",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mostrar pacientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/paciente/mostrarPacientes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"paciente",
+						"mostrarPacientes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mostrar paciente por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/paciente/mostrarPaciente/:idPaciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"paciente",
+						"mostrarPaciente",
+						":idPaciente"
+					],
+					"variable": [
+						{
+							"key": "idPaciente",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "eliminar paciente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/paciente/eliminarPaciente/:idPaciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"paciente",
+						"eliminarPaciente",
+						":idPaciente"
+					],
+					"variable": [
+						{
+							"key": "idPaciente",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar paciente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/paciente/editarPaciente/:idPaciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"paciente",
+						"editarPaciente",
+						":idPaciente"
+					],
+					"variable": [
+						{
+							"key": "idPaciente",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crear paciente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/paciente/crearPaciente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"paciente",
+						"crearPaciente"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
