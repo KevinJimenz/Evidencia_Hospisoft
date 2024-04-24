@@ -52,6 +52,67 @@ citas.get("/citas/mostrarPacienteId/:idPaciente",(req,res) => {
 })
 });
 //mostrar citas
+citas.get("/citas/mostrarCitas",(req,res) => {
+   
+     let consulta = "SELECT citas.idCita,citas.descripcion,citas.direccion, citas.fecha,citas.horaInicio,citas.horaFin, pacientes.nombrePaciente, medicos.nombreMedico FROM citas INNER JOIN pacientes ON citas.id_Paciente = pacientes.idPaciente RIGHT JOIN medicos ON citas.id_Medico = medicos.idMedico;"
+
+    conexion.query(consulta,(error,resultado)=>{
+        try{
+            res.status(200).send(resultado)
+        }
+        catch(error){
+            res.status(400).send({
+                "status": "error",
+                "message": "Error al Mostrar el paciente",
+            })
+        }
+
+})
+});
+citas.get("/citas/verificarCita/:horaInicio/:horaFin/:fecha",(req,res) => {
+   let horaInicio = req.params.horaInicio
+   let horaFin = req.params.horaFin
+   let fecha = req.params.fecha
+    let consulta = "SELECT * from citas where horaInicio BETWEEN '"+horaInicio+"' AND '"+horaFin+"' AND fecha = '"+fecha+"' or horaFin BETWEEN '"+horaInicio+"' AND '"+horaFin+"' and fecha = '"+fecha+"'";
+
+   conexion.query(consulta,(error,resultado)=>{
+       try{
+           res.status(200).send(resultado)
+       }
+       catch(error){
+           res.status(400).send({
+               "status": "error",
+               "message": "Error al Mostrar el paciente",
+           })
+       }
+
+})
+});
+
+citas.all("/citas/crearCita/:descripcion/:direccion/:fecha/:idPaciente/:idMedico/:horaInicio/:horaFin", (req,res)=>{
+    let descripcion = req.params.descripcion
+    let direccion = req.params.direccion
+    let fecha = req.params.fecha
+    let idPaciente = req.params.idPaciente
+    let idMedico = req.params.idMedico
+    let horaInicio = req.params.horaInicio
+    let horaFin = req.params.horaFin
+
+    conexion.query("INSERT INTO citas VALUES ('','"+descripcion+"','"+direccion+"', '"+fecha+"' , "+idPaciente+",  "+idMedico+",  '"+horaInicio+"', '"+horaFin+"')",(error,resultado)=>{
+    try{
+        res.status(200).send({
+            "message": "Cita Creada"
+        })
+    }
+    catch(error){
+        res.status(400).send({
+            "status": "error",
+            "message": "Error al crear cita"
+        })
+    }
+})
+})
+
 
 
 module.exports = citas

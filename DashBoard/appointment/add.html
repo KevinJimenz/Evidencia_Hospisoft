@@ -189,7 +189,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <h2>Add Appointment</h2>
-                                <form>
+                                <form method="dialog">
                                     <div class="mb-3">
                                       <label for="exampleInputEmail1" class="form-label">Description</label>
                                       <input type="text" class="description form-control" id="des" aria-describedby="emailHelp">
@@ -201,6 +201,10 @@
                                       <label for="exampleInputEmail1" class="form-label">Fecha</label>
                                       <input type="date" class="form-control" id="date" aria-describedby="emailHelp">
                                     </div>
+                                </div>  <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Hora Inicio</label>
+                                    <input type="time" class="form-control" id="horaInicio" aria-describedby="emailHelp">
+                                  </div>
                                     <div class="row">
                                         <div class="mb-3 col-6">
                                             <label for="exampleInputEmail1" class="form-label">Person</label>
@@ -297,8 +301,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-to-blob/4.1.0/canvas-to-blob.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
-    <script src="./appointment.js"></script>
+    <script src="./add.js"></script>
   
 </body>
 

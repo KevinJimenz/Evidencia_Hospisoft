@@ -205,9 +205,12 @@
                                 <table id="tabla" class="table table-striped" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th class="bg-dark text-light">ID</th>
                                             <th class="bg-dark text-light">Description</th>
                                             <th class="bg-dark text-light">Direction</th>
                                             <th class="bg-dark text-light">Date</th>
+                                            <th class="bg-dark text-light">Start Time</th>
+                                            <th class="bg-dark text-light">End Time</th>
                                             <th class="bg-dark text-light">Patient</th>
                                             <th class="bg-dark text-light">Doctor</th>
                                             <th class="bg-warning text-light text-center">Edit</th>
@@ -218,6 +221,46 @@
                                    
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-4" id="form">
+                        <div class="card-header py-3"></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <form >
+                                    <input type="text" class="form-control" style="visibility: hidden;" id="id" aria-describedby="emailHelp">
+                                    <div class="mb-3">
+                                      <label for="exampleInputEmail1"  class="form-label">Description</label>
+                                      <input type="text" class="form-control"  id="descripcion" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Direccion</label>
+                                      <input type="text" class="form-control" id="direccion" aria-describedby="emailHelp">
+                                    </div>  
+                                    <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Fecha</label>
+                                      <input type="date" class="form-control" id="fecha" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Hora Inicio</label>
+                                        <input type="time" class="form-control" id="horaInicio" aria-describedby="emailHelp">
+                                    </div> 
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">paciente</label>
+                                        <select class="form-select" aria-label="Default select example " id="paciente">
+                                          
+                                          </select>
+                                    </div> 
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Medico</label>
+                                        <select class="form-select" aria-label="Default select example" id="medico">
+                                           
+                                        </select>
+                                    </div> 
+                                  <button type="button" id="btnEditarDoctor"  class="btn btn-success">Edit</button>
+                              </form>
                             </div>
                         </div>
                     </div>
