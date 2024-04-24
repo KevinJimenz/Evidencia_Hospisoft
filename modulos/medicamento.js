@@ -78,9 +78,9 @@ res.status(200).send({
 })
 
 
-medicamento.post("/medicamento/crearMedicamento", (req,res)=>{
-   let form = req.body;
-conexion.query("INSERT INTO medicamentos SET ?",form,(error,resultado)=>{
+medicamento.all("/medicamento/crearMedicamento/:descripcion", (req,res)=>{
+   let descripcion = req.params.descripcion;
+conexion.query("INSERT INTO medicamentos VALUES ('','"+descripcion+"',1) ",(error,resultado)=>{
     
 
     try{

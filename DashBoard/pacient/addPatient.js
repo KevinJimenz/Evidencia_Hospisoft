@@ -49,13 +49,33 @@ $(document).ready(function(){
       // Invertir el estado de visibilidad para la próxima vez que se haga clic
       elementoVisible = !elementoVisible;
   })
-/**
- * *Add Doctor
- */
-// ? Capturo datos
-let btnAgregar = document.getElementById('btnAgregar')
+let UsuarioElegido ;
+fetch(`http://localhost:3000/usuario/MostrarUsuarios`)
+.then((response)=>{
+    return response.json()
+})
+.then((response)=>{
+let user =  document.getElementById('user')
+var option ;
+user.addEventListener('change', function(){
+   option = user.options[user.selectedIndex]
+  UsuarioElegido = option.value
+})
+response.forEach(row => {
+    let option =`<option value="${row.idUser}">${row.userName}</option>`
+    user.innerHTML += option
+});
+})
+let btnAgregar =  document.getElementById('btnAgregar')
 btnAgregar.addEventListener('click', ()=>{
-    let descripcion = document.getElementById('des').value
-    // ? Hago el fetch con los datos y se inserta en tabla 
-    fetch(`http://localhost:3000/medicamento/crearMedicamento/${descripcion}`)
+    let name = document.getElementById('name').value
+    let apellido = document.getElementById('lastname').value
+    let email = document.getElementById('email').value
+    let telefono = document.getElementById('telefono').value
+    let movil = document.getElementById('movil').value
+    let date = document.getElementById('date').value
+    let eps = document.getElementById('eps').value
+    let pass = document.getElementById('pass').value
+    let idUsuario = UsuarioElegido
+    fetch(`http://localhost:3000/paciente/crearPaciente/${name}/${apellido}/${email}/${telefono}/${movil}/${date}/${eps}/${idUsuario}/${pass}`)
 })

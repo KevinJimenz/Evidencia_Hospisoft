@@ -20,7 +20,8 @@
     <!-- Custom styles for this template -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
-
+    <link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link  href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="../../assets/dist/css/sb-admin-2.min.css" rel="stylesheet">
@@ -31,7 +32,6 @@
     <link href="../../vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="../../vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="../../vendor/simple-datatables/style.css" rel="stylesheet">
-
     <!-- Custom styles for this page -->
     <link href="../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="patient.css">
@@ -58,7 +58,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="../main/index.html">
+                <a class="nav-link" href="../main/main.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Graphic</span></a>
             </li>
@@ -120,18 +120,14 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components </h6>
                         <a class="collapse-item" href="../pacient/add.html">Add</a>
-                        <a class="collapse-item" href="../pacient/edit.html">Edit</a>
-                        <a class="collapse-item" href="../pacient/delete.html">Delete</a>
-                        <a class="collapse-item" href="../pacient/consult.html">Consult</a>
+                        <a class="collapse-item" href="../pacient/tabla.html">Table</a>
                     </div>
                 </div>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
+        
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -153,17 +149,7 @@
                 </div>
             </li>
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item active">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
+        
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -194,15 +180,75 @@
                         <div class="card-header py-3"></div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <h2>Consult Patient</h2>
-                                <form>
+                                <h2 class="pt-3 pb-4 " style="color: rgb(146, 146, 146);">Edit Patient</h2>
+                                <table id="tabla" class="table table-striped" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="bg-dark text-light">Id Patient</th>
+                                            <th class="bg-dark text-light">Name</th>
+                                            <th class="bg-dark text-light">LastName</th>
+                                            <th class="bg-dark text-light">Email</th>
+                                            <th class="bg-dark text-light">Phone Patient</th>
+                                            <th class="bg-dark text-light">Mobile Phone</th>
+                                            <th class="bg-dark text-light">Birth date</th>
+                                            <th class="bg-dark text-light">EPS</th>
+                                            <th class="bg-dark text-light">User</th>
+                                            <th class="bg-warning text-light text-center">Edit</th>
+                                            <th class="bg-danger text-light text-center">Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="datos">
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card shadow mb-4" id="form" style="visibility: hidden;">
+                        <div class="card-header py-3"></div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <form >
+                                    <input type="text" class="form-control" style="visibility: hidden;" id="id" aria-describedby="emailHelp">
                                     <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Id</label>
-                                        <input type="text" class="form-control" id="id" aria-describedby="emailHelp">
+                                      <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                                      <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
+                                    </div>  
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Apellido</label>
+                                        <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp">
+                                      </div>  
+                                      <div class="mb-3">
+                                        <label for="exampleInputEmail1"  class="form-label">Email</label>
+                                        <input type="text" class="form-control"  id="email" aria-describedby="emailHelp">
                                       </div>
-                                      <button type="button" id="btn" class="btn btn-primary">Consult</button>
-                                  </form>
-                              <br>
+                                      <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Telefono</label>
+                                        <input type="text" class="form-control" id="telefono" aria-describedby="emailHelp">
+                                      </div>  
+                                      <div class="mb-3">
+                                          <label for="exampleInputEmail1" class="form-label">Movil</label>
+                                          <input type="text" class="form-control" id="movil" aria-describedby="emailHelp">
+                                        </div>  
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1"  class="form-label">Fecha de Nacimiento</label>
+                                            <input type="date" class="form-control" value=""  id="date" aria-describedby="emailHelp">
+                                          </div>
+                                          <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Eps</label>
+                                            <input type="text" class="form-control" id="eps" aria-describedby="emailHelp">
+                                          </div>  
+                                          <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Usuarios</label>
+                                            <select name="" class="user" id="user">
+                                                <option value=""></option>
+                                            </select>
+                                          </div>
+                                     
+                                 
+                                  <button type="button" id="btnEditarDoctor"  class="btn btn-success">Edit</button>
+                              </form>
                             </div>
                         </div>
                     </div>
@@ -251,6 +297,10 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../vendor/apexcharts/apexcharts.min.js"></script>
     <script src="../../vendor/chart.js/chart.umd.js"></script>
@@ -280,9 +330,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-to-blob/4.1.0/canvas-to-blob.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
- 
     <script src="./patient.js"></script>
-  
+    
 </body>
 
 </html>

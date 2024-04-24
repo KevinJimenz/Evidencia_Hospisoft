@@ -97,20 +97,9 @@ main{
 .medicine.active + .content_medicine{
     display: block;
 }
-.description{  
-    height: 90px;
-}
-.person{
-    display: block;
+.user{
     width: 100%;
-    height: 40px;
-    border-radius: 0.5rem;
     border-color: lightgray;
-}
-.doctor{
-    display: block;
-    width: 100%;
-    height: 40px;
-    border-radius: 0.5rem;
-    border-color: lightgray;
+    padding: 1.2%;
+    border-radius: 0.4rem;
 }

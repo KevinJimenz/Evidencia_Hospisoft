@@ -120,9 +120,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components </h6>
                         <a class="collapse-item" href="../pacient/add.html">Add</a>
-                        <a class="collapse-item" href="../pacient/edit.html">Edit</a>
-                        <a class="collapse-item" href="../pacient/delete.html">Delete</a>
-                        <a class="collapse-item" href="../pacient/consult.html">Consult</a>
+                        <a class="collapse-item" href="../pacient/tabla.html">Table</a>
                     </div>
                 </div>
             </li>
@@ -196,30 +194,51 @@
                             <div class="table-responsive">
                                 <h2>Add Patient</h2>
                                 <form>
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Description</label>
-                                      <input type="text" class="description form-control" id="des" aria-describedby="emailHelp">
+                                    <div class="row">
+                                        <div class="mb-3 col-6">
+                                            <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                                            <input type="text" class="description form-control" id="name" aria-describedby="emailHelp">
+                                          </div>
+                                          <div class="mb-3 col-6">
+                                            <label for="exampleInputEmail1" class="form-label">Apellido</label>
+                                            <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp">
+                                          </div> 
                                     </div>
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Direction</label>
-                                      <input type="text" class="form-control" id="direction" aria-describedby="emailHelp">
-                                    </div>  <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Fecha</label>
-                                      <input type="date" class="form-control" id="date" aria-describedby="emailHelp">
+                                   <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Email</label>
+                                      <input type="text" class="form-control" id="email" aria-describedby="emailHelp">
                                     </div>
                                     <div class="row">
                                         <div class="mb-3 col-6">
-                                            <label for="exampleInputEmail1" class="form-label">Person</label>
-                                            <Select class="person" id="person"> </Select>
+                                            <label for="exampleInputEmail1" class="form-label">Telefono</label>
+                                            <input type="text" class="form-control" id="telefono" aria-describedby="emailHelp">
                                           </div>
                                           <div class="mb-3 col-6">
-                                            <label for="exampleInputEmail1" class="form-label">Doctor</label>
-                                            <Select class="doctor" id="doctor"> </Select>
+                                            <label for="exampleInputEmail1" class="form-label">Movil</label>
+                                            <input type="text" class="form-control" id="movil" aria-describedby="emailHelp">
                                           </div>
                                     </div>
-                               
-                                  
-                                  <button type="button" id="btn" class="btn btn-success">Agregar</button>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Fecha Nacimiento</label>
+                                        <input type="date" class="form-control" id="date" aria-describedby="emailHelp">
+                                    </div>
+                                    <div class="row">
+                                        <div class="mb-3 col-6">
+                                            <label for="exampleInputEmail1" class="form-label">EPS</label>
+                                            <input type="text" class="form-control" id="eps" aria-describedby="emailHelp">
+                                          </div>
+                                          <div class="mb-3 col-6">
+                                            <label for="exampleInputEmail1" class="form-label">Usuario</label>
+                                            <select name="" class="user" id="user">
+                                                <option value=""></option>
+                                            </select>
+                                          </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Password</label>
+                                        <input type="text" class="form-control" id="pass" aria-describedby="emailHelp">
+                                    </div>
+                                  <button type="button" id="btnAgregar" class="btn btn-success">Agregar</button>
                               </form>
                               <br>
                             </div>
@@ -300,7 +319,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
  
-    <script src="./patient.js"></script>
+    <script src="./addPatient.js"></script>
   
 </body>
 

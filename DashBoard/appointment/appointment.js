@@ -41,8 +41,7 @@ $(".patient").click(function(){
 });
 
 });
-=======
->>>>>>> 3ae6a4cd9613ed6dbc25885f6edf1116abd1642e
+
 var elementoVisible = true;
 let toggle = document.getElementById('sidebarToggle')
 toggle.addEventListener('click',()=>{
@@ -192,16 +191,3 @@ response.forEach(row => {
 }) 
 })
 
-
-    let title = document.getElementById('title')
-    if (elementoVisible) {
-        // Si el elemento está visible, ocultarlo
-        title.style.visibility = 'hidden';
-    } else {
-        // Si el elemento está oculto, mostrarlo
-        title.style.visibility = 'visible';
-    }
-    
-    // Invertir el estado de visibilidad para la próxima vez que se haga clic
-    elementoVisible = !elementoVisible;
-})
