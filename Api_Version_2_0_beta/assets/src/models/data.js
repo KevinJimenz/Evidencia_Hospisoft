@@ -1,22 +1,10 @@
 import { createPool } from 'mysql2';
-const mysql = require('mysql2');
+import dotenv from 'dotenv';
+dotenv.config({ path: "../../../.env"})
 
-const conexion = mysql.createConnection({
-  host: "127.0.0.1",
-  user : "root",
-  password: "",
-  database: "hospisoft"
-
-
-})
-
-conexion.connect((error)=>{
-    if (error) {
-      console.log(error);
-      
-    } else {
-      console.log("se ha conectado correctamente a la base de datos!");
-    }
-});
-
-module.exports = conexion;
+export const connection = createPool({
+ host: process.env.MYSQL_HOST,
+ user: process.env.MYSQL_USER,
+ password: process.env.MYSQL_PASSWORD,
+ database: process.env.MYSQL_DATABASE,
+}).promise();
