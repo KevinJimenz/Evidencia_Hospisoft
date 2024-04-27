@@ -1,0 +1,99 @@
+
+  
+.sidebar{
+    background-color: #000000;
+    
+}
+.name{
+    font-family: "Poppins", sans-serif;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+ 
+}
+.navbar{
+    background-color: rgb(255, 255, 255);
+}
+
+
+
+.title{
+    color: black;
+    font-size: 19px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-decoration: none;
+ 
+}
+.title:hover{
+    color: black;
+}
+main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+   
+}
+
+.right{
+    width: 110%;
+}
+.headerMain{
+    background-color: rgb(238, 238, 238);
+}
+.lista{
+    color: black;
+    font-size: 19px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    list-style-type: none;
+}
+.li{
+    color: black;
+}
+.logo{
+    display: flex;
+    justify-content: space-around;
+   flex-wrap: wrap;
+    
+}
+.title{
+    margin-top: 10%;
+    margin-right: 7%;
+    color: black;
+    font-size: 19px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+   
+}
+.selectGrafic{
+    width: 100%;
+}
+.selectMonth{
+    width: 50%;
+}
+
+/** Contenedores de los CRUD
+
+/** Dates */
+
+.content_dates{
+ display: none;
+}
+.dates.active + .content_dates{
+    display: block;
+}
+/** Doctors */
+.content_doctors{
+    display: none;
+}
+.doctors.active + .content_doctors{
+    display: block;
+}
+.content_patient{
+    display: none;
+}
+.patient.active + .content_patient{
+    display: block;
+}
+.content_medicine{
+    display: none;
+}
+.medicine.active + .content_medicine{
+    display: block;
+}

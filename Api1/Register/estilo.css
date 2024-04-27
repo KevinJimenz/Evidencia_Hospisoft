@@ -1,0 +1,12 @@
+.Rol {
+    display: block;
+    height: 34px;
+    width: 42%;
+    border-radius: 0.2rem;
+    border-color:  lightgray;
+    text-align: center;
+}
+.division{
+    display: block;
+    height: 10px;
+}
