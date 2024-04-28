@@ -7,4 +7,8 @@ export const connection = createPool({
  user: process.env.MYSQL_USER,
  password: process.env.MYSQL_PASSWORD,
  database: process.env.MYSQL_DATABASE,
+<<<<<<< HEAD
 }).promise();
+=======
+}).promise();
+>>>>>>> 30ed91b3f170ba70e21c163cb5cd97e808ecb9b3
