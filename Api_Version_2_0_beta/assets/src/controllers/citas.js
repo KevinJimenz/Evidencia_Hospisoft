@@ -1,217 +1,198 @@
+import conexion from "../../../../Api1/modulos/data";
+import { connection } from "../models/data";
+
+export const pacientesAtendidosMes = async (req,res) =>{
+let mes = req.params.mes
+let sql = "Call pacientesAtendidosMes(?)";
+let [filas] = await connection.query(sql,[mes]);
+if(!filas){
+return res.send({
+  status: "error",
+  message: "No hay registros de pacientes atendidos al mes",
+})
+
+}
+return res.send({
+  status: "success",
+  data: filas,
+})
 
 
-const express = require("express");
-const citas = express.Router();
-const conexion = require("./data");
 
-citas.get("/citas/medicos/pacientesAtendidos/:mes", (req, res) => {
-  let mes = req.params.mes;
-  let consulta =
-    "SELECT nombreMedico as Nombre , apellidoMedico as Apellido , COUNT(*) as Total_Pacientes FROM citas INNER JOIN medicos on id_Medico = idMedico Where MONTH(fecha) = " +
-    mes;
-  conexion.query(consulta, (error, resultado) => {
-    try {
-      res.status(200).send(resultado);
-    } catch (error) {
-      res.status(400).send({
-        status: "error",
-        message: "Error al Mostrar pacientes",
-      });
-    }
-  });
-});
-citas.all("/cita/eliminarCita/:idCita", (req, res) => {
-  let idCita = req.params.idCita;
-  conexion.query(
-    "DELETE FROM citas WHERE idCita=" + idCita,
-    (error, resultado) => {
-      try {
-        res.status(200).send({
-          message: "El medico ha sido eliminado correctamente",
-        });
-      } catch (error) {
-        res.status(400).send({
-          status: "error",
-          message: "Error al eliminar el medico",
-        });
-      }
-    }
-  );
-});
-citas.get("/citas/pacientesAtendidos", (req, res) => {
-  conexion.query(
-    "SELECT * FROM citas ORDER BY id_Paciente",
-    (error, resultado) => {
-      try {
-        res.status(200).send(resultado);
-      } catch (error) {
-        res.status(400).send({
-          status: "error",
-          message: "Error al Mostrar pacientes",
-        });
-      }
-    }
-  );
-});
-citas.get("/citas/mostrarPacienteId/:idPaciente", (req, res) => {
-  let idPaciente = req.params.idPaciente;
-  let consulta =
-    "SELECT citas.descripcion,citas.direccion, citas.fecha, citas.id_Paciente, pacientes.nombrePaciente, pacientes.apellidoPaciente, pacientes.emailPaciente, pacientes.telefonoPaciente, pacientes.fechaNacimiento, pacientes.epsPaciente, medicos.nombreMedico, medicos.apellidoMedico, medicos.emailMedico, medicos.especialidad FROM citas INNER JOIN pacientes ON citas.id_Paciente = pacientes.idPaciente RIGHT JOIN medicos ON citas.id_Medico = medicos.idMedico WHERE idPaciente = " +
-    idPaciente;
+}
 
-  conexion.query(consulta, (error, resultado) => {
-    try {
-      res.status(200).send(resultado);
-    } catch (error) {
-      res.status(400).send({
-        status: "error",
-        message: "Error al Mostrar el paciente",
-      });
-    }
-  });
-});
-//mostrar citas
-citas.get("/citas/mostrarCitas", (req, res) => {
-  let consulta =
-    "SELECT citas.idCita,citas.descripcion,citas.direccion, citas.fecha,citas.horaInicio,citas.horaFin , pacientes.idPaciente, pacientes.nombrePaciente, medicos.idMedico , medicos.nombreMedico FROM citas INNER JOIN pacientes ON citas.id_Paciente = pacientes.idPaciente INNER JOIN medicos ON citas.id_Medico = medicos.idMedico;";
+export const pacientesAtendidos = async (req,res) =>{
 
-  conexion.query(consulta, (error, resultado) => {
-    try {
-      res.status(200).send(resultado);
-    } catch (error) {
-      res.status(400).send({
-        status: "error",
-        message: "Error al Mostrar el paciente",
-      });
-    }
-  });
-});
-citas.get("/citas/verificarCita/:horaInicio/:horaFin/:fecha", (req, res) => {
-  let horaInicio = req.params.horaInicio;
-  let horaFin = req.params.horaFin;
-  let fecha = req.params.fecha;
-  let consulta =
-    "SELECT * from citas where horaInicio BETWEEN '" +
-    horaInicio +
-    "' AND '" +
-    horaFin +
-    "' AND fecha = '" +
-    fecha +
-    "' or horaFin BETWEEN '" +
-    horaInicio +
-    "' AND '" +
-    horaFin +
-    "' and fecha = '" +
-    fecha +
-    "'";
-
-  conexion.query(consulta, (error, resultado) => {
-    try {
-      res.status(200).send(resultado);
-    } catch (error) {
-      res.status(400).send({
-        status: "error",
-        message: "Error al Mostrar el paciente",
-      });
-    }
-  });
-});
-
-citas.all(
-  "/citas/crearCita/:descripcion/:direccion/:fecha/:idPaciente/:idMedico/:horaInicio/:horaFin",
-  (req, res) => {
-    let descripcion = req.params.descripcion;
-    let direccion = req.params.direccion;
-    let fecha = req.params.fecha;
-    let idPaciente = req.params.idPaciente;
-    let idMedico = req.params.idMedico;
-    let horaInicio = req.params.horaInicio;
-    let horaFin = req.params.horaFin;
-
-    conexion.query(
-      "INSERT INTO citas VALUES ('','" +
-        descripcion +
-        "','" +
-        direccion +
-        "', '" +
-        fecha +
-        "' , " +
-        idPaciente +
-        ",  " +
-        idMedico +
-        ",  '" +
-        horaInicio +
-        "', '" +
-        horaFin +
-        "')",
-      (error, resultado) => {
-        try {
-          res.status(200).send({
-            message: "Cita Creada",
-          });
-        } catch (error) {
-          res.status(400).send({
-            status: "error",
-            message: "Error al crear cita",
-          });
-        }
-      }
-    );
+  let sql = "Call pacientesAtendidos";
+  let [filas] = await connection.query(sql);
+  if(!filas){
+  return res.send({
+    status: "error",
+    message: "No hay registros de pacientes atendidos",
+  })
+  
   }
-);
-
-citas.all(
-  "/citas/editarCitas/:idCita/:descripcion/:direccion/:fecha/:idPaciente/:idMedico/:horaInicio/:horaFin",
-  (req, res) => {
-    let idCita = req.params.idCita;
-    let descripcion = req.params.descripcion;
-    let direccion = req.params.direccion;
-    let fecha = req.params.fecha;
-    let idPaciente = req.params.idPaciente;
-    let idMedico = req.params.idMedico;
-    let horaInicio = req.params.horaInicio;
-    let horaFin = req.params.horaFin;
-    console.log(
-      idCita,
-      descripcion,
-      direccion,
-      fecha,
-      idPaciente,
-      idMedico,
-      horaInicio,
-      horaFin
-    );
-    conexion.query(
-      "UPDATE citas SET descripcion = '" +
-        descripcion +
-        "', direccion = '" +
-        direccion +
-        "', fecha ='" +
-        fecha +
-        "', id_Paciente = " +
-        idPaciente +
-        ", id_Medico = " +
-        idMedico +
-        " , horaInicio = '" +
-        horaInicio +
-        "', horaFin = '" +
-        horaFin +
-        "' WHERE idCita = " +
-        idCita,
-      (error, resultado) => {
-        try {
-          res.status(200).send({
-            message: "cita actualizada",
-          });
-        } catch (error) {
-          res.status(200).send({
-            status: "error",
-            message: "Error al actualizar cita",
-          });
-        }
-      }
-    );
+  return res.send({
+    status: "success",
+    data: filas,
+  })
+  
+  
+  
   }
-);
+
+  export const EliminarCita = async (req,res) => {
+
+    try{
+
+      let idCita = req.params.idCita;
+
+      const sql = "CALL eliminarCita(?)"
+  
+      await connection.query(sql,[idCita])
+
+      res.send({
+        status: "200",
+        message: "Cita Eliminada",
+      })
+
+    }
+    catch(error){
+
+      res.send({
+        status: "400",
+        message: "Error al eliminar la cita",
+      })
+
+      console.log(error)
+
+    }
+    }
+
+    export const mostrarPacientesId = async (req,res)=>{
+      
+        let idPaciente = req.params.idPaciente;
+        const sql = "CALL mostrarPacientesId(?)";
+        let [filas] = await connection.query(sql,[idPaciente]);
+        if(!filas){
+          return res.send({
+            status: "error",
+            message: "No hay pacientes registrados",
+          })
+        }
+        return res.send({
+          status: "success",
+          data: filas,
+        })
+
+      }
+
+      export const mostrarCitas = async (req,res)=>{
+        
+        let sql = "Call mostrarCitas";
+        let [filas] = await connection.query(sql);
+        if(!filas){
+          return res.send({
+            status: "error",
+            message: "No hay citas registradas",
+          })
+        }
+        return res.send({
+          status: "success",
+          data: filas,
+        })
+
+      }
+
+      export const verificarCita = async (req,res)=>{
+        
+        let horaInicio = req.params.horaInicio;
+        let horaFin = req.params.horaFin;
+        let fecha = req.params.fecha;
+        let sql = "Call verificarCita(?,?,?)";
+        let [filas] = await connection.query(sql,[horaInicio,horaFin,fecha]);
+        if(!filas){
+          return res.send({
+            status: "error",
+            message: "No hay citas registradas",
+          })
+        }
+        return res.send({
+          status: "success",
+          data: filas,
+        })
+
+
+
+      }
+      
+  export const crearCita = async (req,res) =>{
+    try{
+      let descripcion = req.params.descripcion;
+      let direccion = req.params.direccion;
+      let fecha = req.params.fecha;
+      let idPaciente = req.params.idPaciente;
+      let idMedico = req.params.idMedico;
+      let horaInicio = req.params.horaInicio;
+      let horaFin = req.params.horaFin;
+      let sql = "Call crearCita(?,?,?,?,?,?,?)";
+      await connection.query(sql,[descripcion,direccion,fecha,idPaciente,
+      idMedico,horaInicio,horaFin]);
+
+      res.send({
+        status: "200",
+        message: "Cita Creada",
+      })
+    }
+    catch(error){
+
+      res.send({
+        status: "400",
+        message: "Error al crear cita",
+      })
+
+    }
+    l
+
+
+
+
+  }
+
+  export const editarCita = async (req,res) =>{
+
+    try{
+      let idCita = req.params.idCita
+      let descripcion = req.params.descripcion;
+      let direccion = req.params.direccion;
+      let fecha = req.params.fecha;
+      let idPaciente = req.params.idPaciente;
+      let idMedico = req.params.idMedico;
+      let horaInicio = req.params.horaInicio;
+      let horaFin = req.params.horaFin;
+      let sql = "Call editarCita(?,?,?,?,?,?,?,?,?)";
+      await connection.query(sql,[idCita,descripcion,direccion,fecha,idPaciente,
+      idMedico,horaInicio,horaFin]);
+      res.send({
+        status: "200",
+        message: "Cita Editada",
+      })
+  
+    }
+    catch(error){
+      res.send({
+        status: "400",
+        message: "Error al editar la cita",
+      })
+      console.log(error)
+
+
+
+    }
+   
+
+  }
+
+
 
 module.exports = citas;
