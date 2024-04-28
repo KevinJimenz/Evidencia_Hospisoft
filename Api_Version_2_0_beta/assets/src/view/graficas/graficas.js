@@ -1,13 +1,4 @@
-
-
-(() => {
-    'use strict'
-    const tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    tooltipTriggerList.forEach(tooltipTriggerEl => {
-      new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-  })
-  // Grafico 1 y Grafico 2
+// Grafico 1 y Grafico 2
   let EneroInicio = new Date("2024-01-01")
   let EneroFin= new Date("2024-01-31")
   let FebreroInicio = new Date("2024-02-01")
@@ -501,39 +492,3 @@ btnDescargar.addEventListener('click', ()=>{
     }
     
 })
-
-/**
- * *Contenido de los CRUD
- */
-// ? dates
-$(document).ready(function(){
-    $(".dates").click(function(){
-      $(this).toggleClass("active");
-      var content = $(this).next(".content_dates");
-      content.slideToggle(300);
-    });
-  });
-// ? Doctors 
-$(document).ready(function(){
-    $(".doctors").click(function(){
-      $(this).toggleClass("active");
-      var content = $(this).next(".content_doctors");
-      content.slideToggle(300);
-    });
-  });
-  // ? Medicine 
-  $(document).ready(function(){
-    $(".medicine").click(function(){
-      $(this).toggleClass("active");
-      var content = $(this).next(".content_medicine");
-      content.slideToggle(300);
-    });
-  });
-  // ? Patient
-  $(document).ready(function(){
-    $(".patient").click(function(){
-      $(this).toggleClass("active");
-      var content = $(this).next(".content_patient");
-      content.slideToggle(300);
-    });
-  });

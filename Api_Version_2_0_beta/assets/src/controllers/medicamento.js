@@ -1,101 +1,61 @@
-const express = require('express');
-const medicamento= express.Router();
-const conexion = require("./data");
+import { connection } from "../models/data";
 
-
-medicamento.get("/medicamento/mostrarMedicamento",(req,res) => {
-
-    conexion.query("Select idMedicamento as id, descripcion as descripcion, existencia as stock From medicamentos",(error,resultado)=>{
-        try{
-            res.status(200).send(resultado)
-        }
-        catch(error){
-            res.status(400).send({
-                "status": "error",
-                "message": "Error al Mostrar Medicamentos",
-            })
-        }
-
-})
-});
-medicamento.get("/medicamento/mostrarMedicamento/:idMedicamento",(req,res) => {
-   
-    let idMedicamento = req.params.idMedicamento;
-    let consulta = "select * from medicamentos where idMedicamento = "+idMedicamento;
-
-
-    conexion.query(consulta,(error,resultado)=>{
-        try{
-            res.status(200).send(resultado)
-        }
-        catch(error){
-            res.status(400).send({
-                "status": "error",
-                "message": "Error al Mostrar el medicamento",
-            })
-        }
-
-})
-});
-medicamento.all("/medicamento/eliminarMedicamento/:idMedicamento",(req,res) => {
-    let idMedicamento= req.params.idMedicamento;
-    let consulta = "delete from medicamentos where idMedicamento="+idMedicamento;
-    conexion.query(consulta,(error,resultado)=>{
-        try{
-            res.status(200).send({
-                "message": "El medicamento ha sido eliminado correctamente"
-            })
-        }
-        catch(error){
-            res.status(400).send({
-                "status": "error",
-                "message": "Error al eliminar el medicamento",
-            })
-        }
-
-})
-});
-
-medicamento.all("/medicamento/editarMedicamento/:idMedicamento/:descripcion/:stock",(req,res)=>{
-    let idMedicamento= req.params.idMedicamento;
-    let descripcion = req.params.descripcion
-    let stock = req.params.stock
-    
-   
-    conexion.query("UPDATE medicamentos SET descripcion = '"+descripcion+"', existencia = '"+stock+"' WHERE idMedicamento = " +idMedicamento, (error,resultado)=>{
-        try{
-res.status(200).send({
-    "message": "Medicamento Actualizado"
-})
-        }
-        catch(error){
-            res.status(200).send({
-                "status": "error",
-                "message": "Error al actualizar medicamento"
-            })
-        }
-    })
-})
-
-
-medicamento.all("/medicamento/crearMedicamento/:descripcion", (req,res)=>{
-   let descripcion = req.params.descripcion;
-conexion.query("INSERT INTO medicamentos VALUES ('','"+descripcion+"',1) ",(error,resultado)=>{
-    
-
-    try{
-        res.status(200).send({
-            "message": "Medicamento Creado"
-        })
+export const listarMedicamentos = async (req,res)=>{
+    // ? Procedimiento almacenado
+    let [filas] = await cnx.query(sql);
+    if (!filas) {
+      return res.send({
+        status: "error",
+        mensaje: "No hay registros",
+      });
     }
-    catch(error){
-        res.status(400).send({
-            "status": "error",
-            "message": "Error al crear medicamento"
-        })
+    return res.send({
+      status: "ok",
+      data: filas,
+    });
+};
+
+export const eliminarMedicamento = async (req,res)=>{
+    // ? Procedimientos almacenados
+    let [filas] = await cnx.query(sql);
+    if (!filas) {
+      return res.send({
+        status: "error",
+        mensaje: "No hay registros",
+      });
     }
-})
+    return res.send({
+      status: "ok",
+      data: filas,
+    });
+};
 
-})
+export const editarMedicamento = async (req,res)=>{
+    // ? Procedimiento almacenado 
+    let [filas] = await cnx.query(sql);
+    if (!filas) {
+      return res.send({
+        status: "error",
+        mensaje: "No hay registros",
+      });
+    }
+    return res.send({
+      status: "ok",
+      data: filas,
+    });
+};
 
-module.exports = medicamento;
+export const crearMedicamento = async (req,res) =>{
+// ? Procedimiento almacenado
+let [filas] = await cnx.query(sql);
+if (!filas) {
+  return res.send({
+    status: "error",
+    mensaje: "No hay registros",
+  });
+}
+return res.send({
+  status: "ok",
+  data: filas,
+});
+};
