@@ -1,12 +1,4 @@
-import { connection } from "../models/data";
-import {pacientesAtendidosMes} from "../controllers/citas"
-import {pacientesAtendidos} from "../controllers/citas"
-import {EliminarCita} from "../controllers/citas"
-import {mostrarPacientesId} from "../controllers/citas"
-import {mostrarCitas} from "../controllers/citas"
-import {verificarCita} from "../controllers/citas"
-import { crearCita } from "../controllers/citas";
-import { editarCita } from "../controllers/citas";
+import {pacientesAtendidosMes, pacientesAtendidos,EliminarCita,mostrarPacientesId,mostrarCitas,verificarCita,crearCita,editarCita} from "../controllers/citas"
 import { Router } from "express";
 
 const citas = Router();
