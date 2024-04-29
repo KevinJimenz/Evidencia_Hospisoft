@@ -35,7 +35,7 @@ else{
     password: password.value
   }
 
-  fetch("http://localhost:3000/usuario/crearUsuario",{method: "POST",
+  fetch("http://localhost:3000/paciente/crearPaciente",{method: "POST",
   headers: {
     'Content-Type': 'application/json'
   },
