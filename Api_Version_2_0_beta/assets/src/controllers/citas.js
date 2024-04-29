@@ -14,10 +14,9 @@ export const pacientesAtendidosMes = async (req, res) => {
     status: "success",
     data: filas,
   });
-};
-
+};// ? listo 
 export const pacientesAtendidos = async (req, res) => {
-  let sql = "Call pacientesAtendidos";
+  let sql = "Call pacientesAtentidos";
   let [filas] = await connection.query(sql);
   if (!filas) {
     return res.send({
@@ -29,7 +28,7 @@ export const pacientesAtendidos = async (req, res) => {
     status: "success",
     data: filas,
   });
-};
+};// ? listo
 
 export const EliminarCita = async (req, res) => {
   try {
