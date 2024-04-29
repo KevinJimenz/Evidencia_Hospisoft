@@ -88,6 +88,7 @@ fetch("http://localhost:3000/citas/mostrarCitas")
       let fechaVieja = item.fecha;
       let fechaNueva = new Date(fechaVieja);
       let fechaUtil = fechaNueva.toISOString().slice(0, 10);
+      console.log(fechaUtil)
       item.fecha = fechaUtil;
       const optionPaciente = document.createElement("option");
       optionPaciente.value = item.idPaciente;

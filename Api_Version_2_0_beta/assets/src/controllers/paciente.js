@@ -18,6 +18,7 @@ export const listarPacientes = async (req,res)=>{
 
 export const editarPaciente = async (req,res) =>{
     // ? Procedimiento almacenado 
+    
 
     let [filas] = await cnx.query(sql);
     if (!filas) {
