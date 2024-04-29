@@ -14,7 +14,7 @@ export const pacientesAtendidosMes = async (req, res) => {
     status: "success",
     data: filas,
   });
-};// ? listo 
+}; // ? listo
 export const pacientesAtendidos = async (req, res) => {
   let sql = "Call pacientesAtentidos";
   let [filas] = await connection.query(sql);
@@ -28,16 +28,12 @@ export const pacientesAtendidos = async (req, res) => {
     status: "success",
     data: filas,
   });
-};// ? listo
-
+}; // ? listo
 export const EliminarCita = async (req, res) => {
   try {
     let idCita = req.params.idCita;
-
     const sql = "CALL eliminarCita(?)";
-
     await connection.query(sql, [idCita]);
-
     res.send({
       status: "200",
       message: "Cita Eliminada",
@@ -47,11 +43,8 @@ export const EliminarCita = async (req, res) => {
       status: "400",
       message: "Error al eliminar la cita",
     });
-
-    console.log(error);
   }
-};
-
+}; // ? listo
 export const mostrarPacientesId = async (req, res) => {
   let idPaciente = req.params.idPaciente;
   const sql = "CALL mostrarPacientesId(?)";
@@ -66,10 +59,9 @@ export const mostrarPacientesId = async (req, res) => {
     status: "success",
     data: filas,
   });
-};
-
+}; // ? listo
 export const mostrarCitas = async (req, res) => {
-  let sql = "Call mostrarCitas";
+  let sql = "Call listarCitas";
   let [filas] = await connection.query(sql);
   if (!filas) {
     return res.send({
@@ -81,8 +73,7 @@ export const mostrarCitas = async (req, res) => {
     status: "success",
     data: filas,
   });
-};
-
+}; // ? listo
 export const verificarCita = async (req, res) => {
   let horaInicio = req.params.horaInicio;
   let horaFin = req.params.horaFin;
@@ -99,8 +90,7 @@ export const verificarCita = async (req, res) => {
     status: "success",
     data: filas,
   });
-};
-
+}; // ? listo
 export const crearCita = async (req, res) => {
   try {
     let descripcion = req.params.descripcion;
@@ -120,7 +110,6 @@ export const crearCita = async (req, res) => {
       horaInicio,
       horaFin,
     ]);
-
     res.send({
       status: "200",
       message: "Cita Creada",
@@ -131,9 +120,7 @@ export const crearCita = async (req, res) => {
       message: "Error al crear cita",
     });
   }
-  l;
-};
-
+}; // ? listo
 export const editarCita = async (req, res) => {
   try {
     let idCita = req.params.idCita;
@@ -144,7 +131,7 @@ export const editarCita = async (req, res) => {
     let idMedico = req.params.idMedico;
     let horaInicio = req.params.horaInicio;
     let horaFin = req.params.horaFin;
-    let sql = "Call editarCita(?,?,?,?,?,?,?,?,?)";
+    let sql = "Call editarCitas(?,?,?,?,?,?,?,?,?)";
     await connection.query(sql, [
       idCita,
       descripcion,
@@ -164,8 +151,5 @@ export const editarCita = async (req, res) => {
       status: "400",
       message: "Error al editar la cita",
     });
-    console.log(error);
   }
-};
-
-
+}; // ? listo

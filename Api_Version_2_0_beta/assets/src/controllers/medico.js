@@ -1,7 +1,6 @@
 import { connection } from "../models/data";
-
 export const mostrarMedicos = async (req, res) => {
-  let sql = "CALL mostrarMedicos";
+  let sql = "CALL listaMedicos";
   let [filas] = await connection.query(sql);
   if ([!filas]) {
     res.status(400).send({
@@ -15,11 +14,10 @@ export const mostrarMedicos = async (req, res) => {
       data: filas,
     });
   }
-};
-
+};// ? listo
 export const mostrarMedicoId = async (req, res) => {
   let idMedico = req.params.idMedico;
-  let sql = "CALL mostrarMedico(?)";
+  let sql = "CALL mostrarMedicoId(?)";
   let [filas] = await connection.query(sql, [idMedico]);
   if ([!filas]) {
     res.status(400).send({
@@ -33,11 +31,10 @@ export const mostrarMedicoId = async (req, res) => {
       data: filas,
     });
   }
-};
-
-export const elminarMedico = async (req, res) => {
+};// ? listo
+export const 	eliminarMedico = async (req, res) => {
   let idMedico = req.params.idMedico;
-  let sql = "CALL eliminarMedico(?)";
+  let sql = "CALL	eliminarMedico(?)";
   let [filas] = await connection.query(sql, [idMedico]);
   if ([!filas]) {
     res.status(400).send({
@@ -51,8 +48,7 @@ export const elminarMedico = async (req, res) => {
       data: filas,
     });
   }
-};
-
+};// ? listo
 export const editarMedico = async (req, res) => {
   try {
     let idMedico = req.params.idMedico;
@@ -78,8 +74,7 @@ export const editarMedico = async (req, res) => {
       message: "Error al Editar Medico",
     });
   }
-};
-
+};//  ? listo 
 export const crearMedico = async (req, res) => {
   try {
     let nombre = req.params.nombre;
@@ -98,8 +93,7 @@ export const crearMedico = async (req, res) => {
       message: "Error al Crear Medico",
     });
   }
-};
-
+};// ? listo
 export const buscarCorreo = async (req, res) => {
   let correo = req.params.email;
   let sql = "CALL buscarCorreo(?)";
@@ -116,4 +110,4 @@ export const buscarCorreo = async (req, res) => {
       data: filas,
     });
   }
-};
+};// ? listo

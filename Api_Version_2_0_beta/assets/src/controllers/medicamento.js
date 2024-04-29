@@ -1,9 +1,8 @@
 import { connection } from "../models/data";
 
 export const listarMedicamentos = async (req, res) => {
-  // ? Procedimiento almacenado
-
-  let [filas] = await cnx.query(sql);
+  let sql = "Call listarMedicamentos"
+  let [filas] = await connection.query(sql);
   if (!filas) {
     return res.send({
       status: "error",
@@ -14,11 +13,11 @@ export const listarMedicamentos = async (req, res) => {
     status: "ok",
     data: filas,
   });
-};
-
+}; // ? listo
 export const eliminarMedicamento = async (req, res) => {
-  // ? Procedimientos almacenados
-  let [filas] = await cnx.query(sql);
+  let id = req.params.id
+  let sql = "Call eliminarMedicamento(?)"
+  let [filas] = await connection.query(sql,[id]);
   if (!filas) {
     return res.send({
       status: "error",
@@ -29,11 +28,13 @@ export const eliminarMedicamento = async (req, res) => {
     status: "ok",
     data: filas,
   });
-};
-
+};// ? listo
 export const editarMedicamento = async (req, res) => {
-  // ? Procedimiento almacenado
-  let [filas] = await cnx.query(sql);
+  let id = req.params.id
+  let descripcion = req.params.descripcion
+  let existencia = req.params.existencia
+  let sql = "Call editarMedicamento(?,?,?)"
+  let [filas] = await connection.query(sql,[id,descripcion,existencia]);
   if (!filas) {
     return res.send({
       status: "error",
@@ -44,11 +45,11 @@ export const editarMedicamento = async (req, res) => {
     status: "ok",
     data: filas,
   });
-};
-
+};//  ? listo
 export const crearMedicamento = async (req, res) => {
-  // ? Procedimiento almacenado
-  let [filas] = await cnx.query(sql);
+  let descripcion = req.params.descripcion
+  let sql= "Call crearMedicamento(?)"
+  let [filas] = await connection.query(sql,[descripcion]);
   if (!filas) {
     return res.send({
       status: "error",
@@ -59,4 +60,4 @@ export const crearMedicamento = async (req, res) => {
     status: "ok",
     data: filas,
   });
-};
+};// ? listo
