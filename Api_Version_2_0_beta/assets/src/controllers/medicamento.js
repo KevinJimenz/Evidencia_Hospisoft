@@ -15,49 +15,47 @@ export const listarMedicamentos = async (req, res) => {
   });
 }; // ? listo
 export const eliminarMedicamento = async (req, res) => {
-  let id = req.params.id
-  let sql = "Call eliminarMedicamento(?)"
-  let [filas] = await connection.query(sql,[id]);
-  if (!filas) {
-    return res.send({
-      status: "error",
-      mensaje: "No hay registros",
-    });
+  try{
+  let id = req.params.id;
+  let sql = "Call eliminarMedicamento(?)";
+  await connection.query(sql, [id]);
+  return res.send({ status: "Ok", message: "Medicamento eliminado" }); 
   }
-  return res.send({
-    status: "ok",
-    data: filas,
-  });
+  catch(error){
+return res.send({ status: "error", message: "Error al eliminar medicamento" }); 
+
+  }
+
 };// ? listo
+
 export const editarMedicamento = async (req, res) => {
-  let id = req.params.id
-  let descripcion = req.params.descripcion
-  let existencia = req.params.existencia
-  let sql = "Call editarMedicamento(?,?,?)"
-  let [filas] = await connection.query(sql,[id,descripcion,existencia]);
-  if (!filas) {
+  try {
+    let descripcion = req.params.descripcion;
+    let existencia = req.params.existencia;
+    let sql = "Call editarMedicamento(?,?,?)";
+    await connection.query(sql, [id, descripcion, existencia]);
+    return res.send({ status: "Ok", message: "Medicamento editado" }); 
+  } catch (error) {
     return res.send({
       status: "error",
-      mensaje: "No hay registros",
-    });
+      message: "Error al editar medicamento",
+    }); 
   }
-  return res.send({
-    status: "ok",
-    data: filas,
-  });
+ 
 };//  ? listo
+
 export const crearMedicamento = async (req, res) => {
-  let descripcion = req.params.descripcion
-  let sql= "Call crearMedicamento(?)"
-  let [filas] = await connection.query(sql,[descripcion]);
-  if (!filas) {
-    return res.send({
-      status: "error",
-      mensaje: "No hay registros",
-    });
+  try {
+    let descripcion = req.params.descripcion;
+    let sql = "Call crearMedicamento(?)";
+    await connection.query(sql, [descripcion]);
+    return res.send({ status: "Ok", message: "Medicamento Creado" }); 
+  } catch (error) {
+      return res.send({
+        status: "error",
+        message: "Error al crear medicamento",
+      }); 
   }
-  return res.send({
-    status: "ok",
-    data: filas,
-  });
+  
+ 
 };// ? listo

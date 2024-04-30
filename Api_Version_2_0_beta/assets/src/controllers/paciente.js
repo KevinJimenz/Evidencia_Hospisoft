@@ -13,86 +13,100 @@ export const listarPacientes = async (req, res) => {
     status: "ok",
     data: filas,
   });
-<<<<<<< HEAD
+
 }; // ? listo
 export const editarPaciente = async (req, res) => {
-  let id = req.params.id
-  let name = req.params.name
-  let apellido = req.params.apellido
-  let email = req.params.email
-  let telefono = req.params.telefono
-  let movil = req.params.movil
-  let fecha = req.params.fecha
-  let eps = req.params.eps
-  let usuario = req.params.usuario
-  let password = req.params.password
-  let sql = "Call editarPaciente(?,?,?,?,?,?,?,?,?,?)"
-  let [filas] = await connection.query(sql,[id,name,apellido,email,telefono,movil,fecha,eps,usuario,password]);
-  if (!filas) {
-=======
-};
+  try{
+  let id = req.params.id;
+  let name = req.params.name;
+  let apellido = req.params.apellido;
+  let email = req.params.email;
+  let telefono = req.params.telefono;
+  let movil = req.params.movil;
+  let fecha = req.params.fecha;
+  let eps = req.params.eps;
+  let usuario = req.params.usuario;
+  let password = req.params.password;
+  let sql = "Call editarPaciente(?,?,?,?,?,?,?,?,?,?)";
+  await connection.query(sql, [
+    id,
+    name,
+    apellido,
+    email,
+    telefono,
+    movil,
+    fecha,
+    eps,
+    usuario,
+    password,
+  ]);
 
-export const editarPaciente = async (req,res) =>{
-    // ? Procedimiento almacenado 
+  return res.send({status:"Ok",
+  message:"Paciente editado"});
 
-    let [filas] = await cnx.query(sql);
-    if (!filas) {
-      return res.send({
-        status: "error",
-        mensaje: "No hay registros",
-      });
-    }
->>>>>>> c88940a9f4bd89b0bfe65469779f863d5b4660c5
-    return res.send({
-      status: "ok",
-      data: filas,
-    });
-<<<<<<< HEAD
   }
-  return res.send({
-    status: "ok",
-    data: filas,
-  });
-};// ? listo
-=======
-}; 
+  catch(error){
+ return res.send({
+   status: "error",
+   mensaje: "No hay registros",
+ });
 
->>>>>>> c88940a9f4bd89b0bfe65469779f863d5b4660c5
+
+  }
+}
+
+// ? listo
+
 export const eliminarPaciente = async (req, res) => {
-  let id = req.params.id
-  let sql = "Call eliminarPaciente(?) "
-  let [filas] = await connection.query(sql,[id]);
-  if (!filas) {
-    return res.send({
-      status: "error",
-      mensaje: "No hay registros",
-    });
+  try{
+let id = req.params.id;
+let sql = "Call eliminarPaciente(?) ";
+await connection.query(sql, [id]);
+return res.send({status:"Ok",message:"Se ha eliminado correctamente"})
   }
+  catch(error){
   return res.send({
-    status: "ok",
-    data: filas,
+    status: error,
+    mensaje: "No hay registros",
   });
+
+  }
+  
+  
+
 };//? listo
+
 export const crearPaciente = async (req, res) => {
-  let name = req.params.name
-  let apellido = req.params.apellido
-  let email = req.params.email
-  let telefono = req.params.telefono
-  let movil = req.params.movil
-  let fecha = req.params.fecha
-  let eps = req.params.eps
-  let usuario = req.params.usuario
-  let password = req.params.password
-  let sql = "Call crearPaciente(?,?,?,?,?,?,?,?,?)"
-  let [filas] = await connection.query(sql,[name,apellido,email,telefono,movil,fecha,eps,usuario,password]);
-  if (!filas) {
-    return res.send({
-      status: "error",
-      mensaje: "No hay registros",
-    });
+  try{
+let name = req.params.name;
+let apellido = req.params.apellido;
+let email = req.params.email;
+let telefono = req.params.telefono;
+let movil = req.params.movil;
+let fecha = req.params.fecha;
+let eps = req.params.eps;
+let usuario = req.params.usuario;
+let password = req.params.password;
+let sql = "Call crearPaciente(?,?,?,?,?,?,?,?,?)";
+await connection.query(sql, [
+  name,
+  apellido,
+  email,
+  telefono,
+  movil,
+  fecha,
+  eps,
+  usuario,
+  password,
+]);
+return res.send({status:'ok',message:"Paciente Creado"});
   }
-  return res.send({
-    status: "ok",
-    data: filas,
-  });
-};// ? listo
+  catch(error){
+    return res.send({
+       status: error,
+       mensaje: "No se pudo crear paciente"
+     });
+
+  }
+  
+};

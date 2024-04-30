@@ -1,4 +1,5 @@
 import { connection } from "../models/data";
+import bcrypt from 'bcrypt';
 
 export const listarUsuarios = async (req, res) => {
   let sql ="Call listarUsuarios"
@@ -30,52 +31,50 @@ export const buscarUsuario = async (req, res) => {
   });
 };// ? listo
 export const eliminarUsuario = async (req, res) => {
-  let id = req.params.id
-  let sql = "Call eliminarUsuario(?)"
-  let [filas] = await connection.query(sql,[id]);
-  if (!filas) {
-    return res.send({
-      status: "error",
-      mensaje: "No hay registros",
-    });
+  try{
+ let id = req.params.id;
+ let sql = "Call eliminarUsuario(?)";
+ await connection.query(sql, [id]);
+ return res.send({ status: "ok", message: "Usuario eliminado" });
   }
-  return res.send({
-    status: "ok",
-    data: filas,
-  });
+  catch(error){
+ return res.send({
+   status: "error",
+   mensaje: "No hay registros"
+ });
+  }
+
 };// ? listo
+
+
 export const editarUsuario = async (req, res) => {
-  let id = req.params.id
-  let name = req.params.name
-  let email = req.params.email
-  let password = req.params.password
-  let sql = "Call editarUsuario(?,?,?,?)"
-  let [filas] = await connection.query(sql,[id,name,email,password]);
-  if (!filas) {
-    return res.send({
-      status: "error",
-      mensaje: "No hay registros",
-    });
+  try{
+ let id = req.params.id;
+ let name = req.params.name;
+ let email = req.params.email;
+ let password = req.params.password;
+ let sql = "Call editarUsuario(?,?,?,?)";
+ await connection.query(sql, [id, name, email, password]);
+ return res.send({ status: "ok", message: "Usuario Editado" });
   }
-  return res.send({
-    status: "ok",
-    data: filas,
-  });
+  catch(error){
+return res.send({ status: error, message: "Error al editar usuario" });
+  }
+ 
 };// ? listo
+
 export const crearUsuario = async (req, res) => {
-  let name = req.params.name
-  let email = req.params.email
-  let password = req.params.password
-  let sql = "Call crearUsuario(?,?,?)"
-  let [filas] = await connection.query(sql,[name,email,password]);
-  if (!filas) {
-    return res.send({
-      status: "error",
-      mensaje: "No hay registros",
-    });
+  try{
+ let name = req.params.name;
+ let email = req.params.email;
+ let password = req.params.password;
+ let sql = "Call crearUsuario(?,?,?)";
+ await connection.query(sql, [name, email, password]);
+ return res.send({ status: "ok", message: "Usuario crear" });
   }
-  return res.send({
-    status: "ok",
-    data: filas,
-  });
+  catch(error){
+return res.send({ status: error, message: "Error al crear usuario" });
+
+  }
+ 
 };// ? listo
