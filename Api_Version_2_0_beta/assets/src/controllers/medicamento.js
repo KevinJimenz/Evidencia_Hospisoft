@@ -1,4 +1,4 @@
-import { connection } from "../models/data";
+import { connection } from "../models/data.js";
 
 export const listarMedicamentos = async (req, res) => {
   let sql = "Call listarMedicamentos"
@@ -51,8 +51,9 @@ export const crearMedicamento = async (req, res) => {
     await connection.query(sql, [descripcion]);
     return res.send({ status: "Ok", message: "Medicamento Creado" }); 
   } catch (error) {
+
       return res.send({
-        status: "error",
+        status: error,
         message: "Error al crear medicamento",
       }); 
   }

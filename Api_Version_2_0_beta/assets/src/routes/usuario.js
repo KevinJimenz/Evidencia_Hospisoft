@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { buscarUsuario,crearUsuario,editarUsuario,listarUsuarios,eliminarUsuario } from '../controllers/usuario';
+import { buscarUsuario,crearUsuario,editarUsuario,listarUsuarios,eliminarUsuario } from '../controllers/usuario.js';
 const usuario = Router();
 
 usuario.all("/usuario/mostrarUsuarios",listarUsuarios);

@@ -1,4 +1,4 @@
-import { connection } from "../models/data";
+import { connection } from "../models/data.js";
 
 export const pacientesAtendidosMes = async (req, res) => {
   let mes = req.params.mes;

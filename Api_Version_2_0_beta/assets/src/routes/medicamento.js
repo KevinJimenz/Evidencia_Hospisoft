@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { listarMedicamentos,eliminarMedicamento,crearMedicamento,editarMedicamento } from "../controllers/medicamento"; 
+import { listarMedicamentos,eliminarMedicamento,crearMedicamento,editarMedicamento } from "../controllers/medicamento.js"; 
 const medicamentos = Router();
 
 medicamentos.all("/medicamentos/crear/:descripcion",crearMedicamento);

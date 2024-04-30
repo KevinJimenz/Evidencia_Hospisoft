@@ -1,4 +1,4 @@
-import {pacientesAtendidosMes, pacientesAtendidos,EliminarCita,mostrarPacientesId,mostrarCitas,verificarCita,crearCita,editarCita} from "../controllers/citas"
+import {pacientesAtendidosMes, pacientesAtendidos,EliminarCita,mostrarPacientesId,mostrarCitas,verificarCita,crearCita,editarCita} from "../controllers/citas.js"
 import { Router } from "express";
 
 const citas = Router();
@@ -14,5 +14,5 @@ citas.post("/citas/crearCita/:descripcion/:direccion/:fecha/:idPaciente/:idMedic
 citas.put("/citas/editarCita/:idCita/:descripcion/:direccion/:fecha/:idPaciente/:idMedico/:horaInicio/:horaFin",editarCita)
 
 
-export default citas
+export default  citas;
 

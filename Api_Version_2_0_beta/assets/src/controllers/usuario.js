@@ -1,4 +1,4 @@
-import { connection } from "../models/data";
+import { connection } from "../models/data.js";
 import bcrypt from 'bcrypt';
 
 export const listarUsuarios = async (req, res) => {

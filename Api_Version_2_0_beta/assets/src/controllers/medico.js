@@ -1,4 +1,4 @@
-import { connection } from "../models/data";
+import { connection } from "../models/data.js";
 export const mostrarMedicos = async (req, res) => {
   let sql = "CALL listaMedicos";
   let [filas] = await connection.query(sql);

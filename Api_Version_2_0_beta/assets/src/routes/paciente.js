@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { crearPaciente, eliminarPaciente, editarPaciente, listarPacientes } from "../controllers/paciente";
+import { crearPaciente, eliminarPaciente, editarPaciente, listarPacientes } from "../controllers/paciente.js";
 const pacientes = Router();
 
 pacientes.all("/pacientes/crear/:name/:apellido/:email/:telefono/:movil/:fecha/:eps/:usuario/:password",crearPaciente);

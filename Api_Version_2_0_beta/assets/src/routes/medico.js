@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { mostrarMedicos, mostrarMedicoId, crearMedico, editarMedico,eliminarMedico,buscarCorreo } from "../controllers/medico";
+import { mostrarMedicos, mostrarMedicoId, crearMedico, editarMedico,eliminarMedico,buscarCorreo } from "../controllers/medico.js";
 
 const medico = Router();
 

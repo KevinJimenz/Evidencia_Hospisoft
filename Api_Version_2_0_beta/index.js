@@ -1,24 +1,29 @@
-const express = require('express');
-const Exceljs = require('exceljs')
-const cors = require('cors');
-const bcrypt = require('bcrypt')
 
+import express from "express";
+import cors from "cors";
+import rutacitas from "./assets/src/routes/citas.js";
+import rutausuario from "./assets/src/routes/usuario.js";
+import rutapaciente from "./assets/src/routes/paciente.js";
+import rutamedico from "./assets/src/routes/medico.js";
+import rutamedicamento from "./assets/src/routes/medicamento.js";
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env" });
+
+//creamos el server node
 const app = express();
-app.use(express.json());
+const port = process.env.PORT || 3000;
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const port = 3000;
+//rutas con MVC
 
-
-//microservicio usuario para gestion
-
-app.use("/", require("./modulos/usuario"))
-app.use("/", require("./modulos/paciente"))
-app.use("/", require("./modulos/medico"))
-app.use("/", require("./modulos/medicamento"))
-app.use("/", require("./modulos/citas"))
-
+app.use(rutacitas,rutausuario,rutamedico,rutamedicamento,rutapaciente);
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`);
+  console.log("server ejecutandose", port);
 });
+
+
+
+
 
