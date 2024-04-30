@@ -1,4 +1,5 @@
 import { connection } from "../models/data.js";
+import bcrypt from "bcrypt";
 
 export const listarPacientes = async (req, res) => {
   let sql = "Call listarPacientes"
@@ -26,7 +27,7 @@ export const editarPaciente = async (req, res) => {
   let fecha = req.params.fecha;
   let eps = req.params.eps;
   let usuario = req.params.usuario;
-  let password = req.params.password;
+  let password = bcrypt.hashSync(req.params.password, 10);
   let sql = "Call editarPaciente(?,?,?,?,?,?,?,?,?,?)";
   await connection.query(sql, [
     id,
@@ -78,6 +79,7 @@ return res.send({status:"Ok",message:"Se ha eliminado correctamente"})
 
 export const crearPaciente = async (req, res) => {
   try{
+
 let name = req.params.name;
 let apellido = req.params.apellido;
 let email = req.params.email;
@@ -86,8 +88,9 @@ let movil = req.params.movil;
 let fecha = req.params.fecha;
 let eps = req.params.eps;
 let usuario = req.params.usuario;
-let password = req.params.password;
+let password = bcrypt.hashSync(req.params.pass, 0)
 let sql = "Call crearPaciente(?,?,?,?,?,?,?,?,?)";
+
 await connection.query(sql, [
   name,
   apellido,
@@ -110,3 +113,26 @@ return res.send({status:'ok',message:"Paciente Creado"});
   }
   
 };
+// falta por terminar 
+export const verificarPaciente = async (req,res)=>{
+  let sql = "CALL buscarCorreoPaciente(?)"
+  let passDatabase = ""
+  let correoVerificar = req.params.email
+  let [array] = await connection.query(sql,[correoVerificar])
+  if(!array[0].length){
+    res.send({
+status: "error",
+message: "Correo no encontrado"
+    })
+  }
+  else{
+    console.log(array)
+    passDatabase = array['passwordPaciente']
+    console.log(passDatabase)
+    
+  }
+
+  
+
+}
+
