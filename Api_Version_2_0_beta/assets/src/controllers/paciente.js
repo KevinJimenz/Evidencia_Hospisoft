@@ -118,6 +118,7 @@ export const verificarPaciente = async (req,res)=>{
   let sql = "CALL buscarCorreoPaciente(?)"
   let passDatabase = ""
   let correoVerificar = req.params.email
+  let pass = req.params.password;
   let [array] = await connection.query(sql,[correoVerificar])
   if(!array[0].length){
     res.send({
@@ -126,9 +127,30 @@ message: "Correo no encontrado"
     })
   }
   else{
-    console.log(array)
-    passDatabase = array['passwordPaciente']
-    console.log(passDatabase)
+   
+    passDatabase = array[0][0]['passwordPaciente']
+
+     let pwd = bcrypt.compareSync(pass, passDatabase);
+     console.log(array)
+     console.log(pwd)
+     if(pwd){
+      
+  res.send({
+    status: "Ok",
+    message: "Ingreso correctamente",
+    idUser: array[0][0]["idPaciente"],
+    email: array[0][0]["emailPaciente"],
+    pass: array[0][0]["passwordPaciente"],
+  });
+     }
+     else{
+       
+      res.send({
+        status: 'error',
+        message: 'Opss ... Contraseña incorrecta'
+      })
+     }
+   
     
   }
 
