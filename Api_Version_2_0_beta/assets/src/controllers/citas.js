@@ -45,9 +45,9 @@ export const EliminarCita = async (req, res) => {
     });
   }
 }; // ? listo
-export const mostrarPacientesId = async (req, res) => {
+export const mostrarPacienteId = async (req, res) => {
   let idPaciente = req.params.idPaciente;
-  const sql = "CALL mostrarPacientesId(?)";
+  let sql = "CALL mostrarPacienteId(?)";
   let [filas] = await connection.query(sql, [idPaciente]);
   if (!filas) {
     return res.send({
@@ -55,10 +55,9 @@ export const mostrarPacientesId = async (req, res) => {
       message: "No hay pacientes registrados",
     });
   }
-  return res.send({
-    status: "success",
-    data: filas,
-  });
+  return res.send(
+    filas
+  );
 }; // ? listo
 export const mostrarCitas = async (req, res) => {
   let sql = "Call listarCitas";
