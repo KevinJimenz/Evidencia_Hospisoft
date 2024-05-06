@@ -26,6 +26,8 @@ const cerrarModal = () =>{
 }
 
 btnCrear.addEventListener("click", () => {
+  selectDoctor.innerHTML = '';
+  selectPerson.innerHTML = '';
   fetch("http://localhost:3000/pacientes/listar")
   .then((res) => res.json())
   .then((res) => {
@@ -55,6 +57,7 @@ btnCrear.addEventListener("click", () => {
   date.value = "";
   horaInicio.value = "";
   title.textContent = "Agregar Cita" 
+  
  btn.textContent = "Agregar"
   modalCita.show();
   opcion = "crear";
@@ -148,6 +151,8 @@ on(document, "click", ".btnEditar", (e) => {
   let direccionCita = fila.children[2].innerHTML;
   let fechaCita = fila.children[3].innerHTML;
   let horaInicioTable = fila.children[4].innerHTML;
+  selectDoctor.innerHTML = '';
+  selectPerson.innerHTML = '';
   fetch("http://localhost:3000/pacientes/listar")
   .then((res) => res.json())
   .then((res) => {

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 29, 2024 at 05:53 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 06-05-2024 a las 19:14:10
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,18 +18,18 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hospisoft`
+-- Base de datos: `hospisoft`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Procedimientos
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `buscarCorreo` (IN `email` VARCHAR(255))   SELECT emailMedico from medicos WHERE emailMedico = email$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `buscarUsuario` (IN `id` INT)   select * from users where idUser = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `crearCita` (IN `descripcion` VARCHAR(255), IN `direccion` VARCHAR(255), IN `fecha` DATE, IN `idPaciente` INT, IN `idMedico` INT, IN `horaInicio` TIME, IN `horaFin` TIME)   INSERT INTO citas VALUES ('',
+CREATE DEFINER=`root`@`localhost` PROCEDURE `crearCita` (IN `descripcion` VARCHAR(255), IN `direccion` VARCHAR(255), IN `fecha` DATE, IN `idPaciente` INT, IN `idMedico` INT, IN `horaInicio` TIME, IN `horaFin` TIME)   INSERT INTO citas VALUES (null,
         descripcion ,
         direccion ,
         fecha,
@@ -38,11 +38,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `crearCita` (IN `descripcion` VARCHA
         horaInicio,
         horaFin)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `crearMedicamento` (IN `descripcion` VARCHAR(255))   INSERT INTO medicamentos VALUES ('',descripcion,1)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `crearMedicamento` (IN `descripcion` VARCHAR(255), IN `existencia` VARCHAR(100000000))   INSERT INTO medicamentos VALUES (null,descripcion,existencia)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `crearMedico` (IN `nombre` INT(255), IN `apellido` INT(255), IN `email` INT(255), IN `especialidad` INT(255))   INSERT INTO medicos VALUES ('',nombre,apellido,email,especialidad)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `crearMedico` (IN `nombre` VARCHAR(255), IN `apellido` VARCHAR(255), IN `email` VARCHAR(255), IN `especialidad` VARCHAR(255))   INSERT INTO medicos VALUES (null,nombre,apellido,email,especialidad)$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `crearPaciente` (IN `name` VARCHAR(150), IN `apellido` VARCHAR(150), IN `email` VARCHAR(150), IN `telefono` VARCHAR(50), IN `movil` VARCHAR(50), IN `fecha` DATE, IN `eps` VARCHAR(255), IN `usuario` INT, IN `password` VARCHAR(10000))   INSERT INTO pacientes VALUES('',name,apellido,email,telefono,movil,fecha,eps,usuario,password)$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `crearPaciente` (IN `name` VARCHAR(150), IN `apellido` VARCHAR(150), IN `email` VARCHAR(150), IN `telefono` VARCHAR(50), IN `movil` VARCHAR(50), IN `fecha` DATE, IN `eps` VARCHAR(255), IN `pass` VARCHAR(10000), IN `idPaciente` BIGINT)   INSERT INTO pacientes VALUES(idPaciente,name,apellido,email,telefono,movil,fecha,eps,pass)$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `crearUsuario` (IN `name` VARCHAR(255), IN `email` VARCHAR(255), IN `password` VARCHAR(10000))   INSERT INTO users VALUES('',name,email,password)$$
 
@@ -56,7 +56,7 @@ horaInicio = horaInicio ,
 horaFin = horaFin
 WHERE idCita = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `editarMedicamento` (IN `id` INT, IN `descripcion` VARCHAR(255), IN `existencia` TINYINT)   UPDATE medicamentos 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `editarMedicamento` (IN `id` INT, IN `descripcion` VARCHAR(255), IN `existencia` VARCHAR(100000000))   UPDATE medicamentos 
 SET descripcion = descripcion,
 existencia = existencia  WHERE idMedicamento = id$$
 
@@ -67,16 +67,14 @@ emailMedico = email,
 especialidad = especialidad
 WHERE idMedico = id$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `editarPaciente` (IN `id` INT, IN `name` VARCHAR(150), IN `apellido` VARCHAR(150), IN `email` VARCHAR(150), IN `telefono` VARCHAR(50), IN `movil` VARCHAR(50), IN `fecha` DATE, IN `eps` VARCHAR(255), IN `usuario` INT, IN `password` VARCHAR(10000))   UPDATE pacientes
+CREATE DEFINER=`root`@`localhost` PROCEDURE `editarPaciente` (IN `id` INT, IN `name` VARCHAR(150), IN `apellido` VARCHAR(150), IN `email` VARCHAR(150), IN `telefono` VARCHAR(50), IN `movil` VARCHAR(50), IN `fecha` DATE, IN `eps` VARCHAR(255))   UPDATE pacientes
 SET pacientes.nombrePaciente = name,
 pacientes.apellidoPaciente = apellido,
 pacientes.emailPaciente = email,
 pacientes.telefonoPaciente = telefono,
 pacientes.movilPaciente = movil,
 pacientes.fechaNacimiento = fecha,
-pacientes.epsPaciente = eps,
-pacientes.usuarioPaciente = usuario,
-pacientes.passwordPaciente = password 
+pacientes.epsPaciente = eps
 WHERE pacientes.idPaciente = id$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `editarUsuario` (IN `id` INT, IN `name` VARCHAR(255), IN `email` VARCHAR(255), IN `password` VARCHAR(10000))   UPDATE users 
@@ -113,15 +111,15 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `pacientesAtendidosMes` (IN `mes` IN
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pacientesAtentidos` ()   SELECT * FROM citas ORDER BY id_Paciente$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarCita` (IN `horaInicio` TIME, IN `horaFin` TIME, IN `fecha` DATE)   SELECT * from citas where horaInicio BETWEEN horaInicio AND horaFin AND fecha = fecha or horaFin BETWEEN 
-    horaInicio AND horaFin and fecha = fecha$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `verificarCita` (IN `horaInicio` TIME, IN `horaFin` TIME, IN `fecha` DATE)   SELECT * from citas where citas.horaInicio BETWEEN  horaInicio AND horaFin 
+  AND citas.fecha = fecha or citas.horaFin BETWEEN horaInicio AND horaFin and citas.fecha = fecha$$
 
 DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `citas`
+-- Estructura de tabla para la tabla `citas`
 --
 
 CREATE TABLE `citas` (
@@ -136,17 +134,18 @@ CREATE TABLE `citas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `citas`
+-- Volcado de datos para la tabla `citas`
 --
 
 INSERT INTO `citas` (`idCita`, `descripcion`, `direccion`, `fecha`, `id_Paciente`, `id_Medico`, `horaInicio`, `horaFin`) VALUES
 (1, 'ddd', 'ddd', '2024-04-08', 2, 2, '16:00:34', '24:00:34'),
-(6, 'lo que sea', 'dkaKDADAD', '2024-04-26', 5, 2, '10:36:00', '11:36:00');
+(11, 'mochar bicho', 'pipas', '2024-06-01', 4, 2, '14:06:00', '15:06:00'),
+(12, 'Diligenciar el ojo', 'peperoni', '2024-05-08', 6, 11, '21:35:00', '22:35:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detalleformula`
+-- Estructura de tabla para la tabla `detalleformula`
 --
 
 CREATE TABLE `detalleformula` (
@@ -160,7 +159,7 @@ CREATE TABLE `detalleformula` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `formulas`
+-- Estructura de tabla para la tabla `formulas`
 --
 
 CREATE TABLE `formulas` (
@@ -173,28 +172,28 @@ CREATE TABLE `formulas` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `medicamentos`
+-- Estructura de tabla para la tabla `medicamentos`
 --
 
 CREATE TABLE `medicamentos` (
   `idMedicamento` int(11) NOT NULL,
   `descripcion` varchar(250) DEFAULT NULL,
-  `existencia` tinyint(1) DEFAULT 1
+  `existencia` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `medicamentos`
+-- Volcado de datos para la tabla `medicamentos`
 --
 
 INSERT INTO `medicamentos` (`idMedicamento`, `descripcion`, `existencia`) VALUES
-(1, 'Acetaminofen', 0),
-(2, 'Paracetamol', 1),
-(5, 'mareol', 1);
+(2, 'Paracetamol', '10000'),
+(5, 'mareol', '1'),
+(6, 'Paracetamol', '45');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `medicos`
+-- Estructura de tabla para la tabla `medicos`
 --
 
 CREATE TABLE `medicos` (
@@ -206,17 +205,18 @@ CREATE TABLE `medicos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `medicos`
+-- Volcado de datos para la tabla `medicos`
 --
 
 INSERT INTO `medicos` (`idMedico`, `nombreMedico`, `apellidoMedico`, `emailMedico`, `especialidad`) VALUES
 (2, 'Kevin', 'Jimenez', 'kevincamilo56@gmail.com', 'neurocirujano'),
-(11, 'Camilo', 'Jiménez Gordillo', 'kevincamilo56@gmail.com', 'NeuroCirujano');
+(11, 'Camilo', 'Jiménez Gordillo', 'kevincamilo56@gmail.com', 'NeuroCirujano'),
+(13, 'JHON ALEXANDER', 'Narvez', 'nar@gmail.com', 'Eliminar Prepucion');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pacientes`
+-- Estructura de tabla para la tabla `pacientes`
 --
 
 CREATE TABLE `pacientes` (
@@ -228,23 +228,22 @@ CREATE TABLE `pacientes` (
   `movilPaciente` varchar(50) DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
   `epsPaciente` varchar(250) DEFAULT NULL,
-  `usuarioPaciente` int(11) DEFAULT NULL,
   `passwordPaciente` varchar(10000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pacientes`
+-- Volcado de datos para la tabla `pacientes`
 --
 
-INSERT INTO `pacientes` (`idPaciente`, `nombrePaciente`, `apellidoPaciente`, `emailPaciente`, `telefonoPaciente`, `movilPaciente`, `fechaNacimiento`, `epsPaciente`, `usuarioPaciente`, `passwordPaciente`) VALUES
-(4, 'Pepe ', 'Pepito Perez', 'PepitoPerez12@gmail.com', '123456', '654321', '2002-10-01', 'Ñeros Unidos', 1, 'w'),
-(5, 'Juan', 'Davison', 'juanSEX@gmail.com', '3232', '322', '2004-02-01', 'IPS', 1, '123'),
-(6, 'Kevin', 'Jimenez', 'kevincamilo56@gmail.com', '33131', '3131', '2005-05-14', 'Comfandi', 1, '123');
+INSERT INTO `pacientes` (`idPaciente`, `nombrePaciente`, `apellidoPaciente`, `emailPaciente`, `telefonoPaciente`, `movilPaciente`, `fechaNacimiento`, `epsPaciente`, `passwordPaciente`) VALUES
+(4, 'Pepe ', 'Pepito Perez', 'PepitoPerez12@gmail.com', '123456', '654321', '2002-10-01', 'Ñeros Unidos', 'w'),
+(5, 'Juan', 'Davison', 'juanSEX@gmail.com', '3232', '322', '2004-02-01', 'IPS', '123'),
+(6, 'Kevin', 'Narvaz', 'kevincamilo56@gmail.len', '33131', '3131', '2005-05-14', 'Comfandi', '123');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE `users` (
@@ -255,7 +254,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
 INSERT INTO `users` (`idUser`, `userName`, `emailUser`, `password`) VALUES
@@ -263,11 +262,11 @@ INSERT INTO `users` (`idUser`, `userName`, `emailUser`, `password`) VALUES
 (2, 'Juan Davison', 'JuanSEX@gmail.com', '123');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `citas`
+-- Indices de la tabla `citas`
 --
 ALTER TABLE `citas`
   ADD PRIMARY KEY (`idCita`),
@@ -275,7 +274,7 @@ ALTER TABLE `citas`
   ADD KEY `fk_medic` (`id_Medico`);
 
 --
--- Indexes for table `detalleformula`
+-- Indices de la tabla `detalleformula`
 --
 ALTER TABLE `detalleformula`
   ADD PRIMARY KEY (`idDetalle`),
@@ -283,7 +282,7 @@ ALTER TABLE `detalleformula`
   ADD KEY `fk_medicamento` (`idMedicamento`);
 
 --
--- Indexes for table `formulas`
+-- Indices de la tabla `formulas`
 --
 ALTER TABLE `formulas`
   ADD PRIMARY KEY (`consecutivo`),
@@ -291,66 +290,53 @@ ALTER TABLE `formulas`
   ADD KEY `fk_medico` (`idMedico`);
 
 --
--- Indexes for table `medicamentos`
+-- Indices de la tabla `medicamentos`
 --
 ALTER TABLE `medicamentos`
   ADD PRIMARY KEY (`idMedicamento`);
 
 --
--- Indexes for table `medicos`
+-- Indices de la tabla `medicos`
 --
 ALTER TABLE `medicos`
   ADD PRIMARY KEY (`idMedico`);
 
 --
--- Indexes for table `pacientes`
---
-ALTER TABLE `pacientes`
-  ADD PRIMARY KEY (`idPaciente`),
-  ADD KEY `fk_user` (`usuarioPaciente`);
-
---
--- Indexes for table `users`
+-- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`idUser`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `citas`
+-- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `idCita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idCita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `detalleformula`
+-- AUTO_INCREMENT de la tabla `detalleformula`
 --
 ALTER TABLE `detalleformula`
   MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `medicamentos`
+-- AUTO_INCREMENT de la tabla `medicamentos`
 --
 ALTER TABLE `medicamentos`
-  MODIFY `idMedicamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idMedicamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `medicos`
+-- AUTO_INCREMENT de la tabla `medicos`
 --
 ALTER TABLE `medicos`
-  MODIFY `idMedico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idMedico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `pacientes`
---
-ALTER TABLE `pacientes`
-  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;

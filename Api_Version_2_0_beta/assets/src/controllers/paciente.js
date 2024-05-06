@@ -23,9 +23,9 @@ export const editarPaciente = async (req, res) => {
   let movil = req.params.movil;
   let fecha = req.params.fecha;
   let eps = req.params.eps;
-  let usuario = req.params.usuario;
-  let password = bcrypt.hashSync(req.params.password, 10);
-  let sql = "Call editarPaciente(?,?,?,?,?,?,?,?,?,?)";
+ 
+  
+  let sql = "Call editarPaciente(?,?,?,?,?,?,?,?)";
   await connection.query(sql, [
     id,
     name,
@@ -34,9 +34,7 @@ export const editarPaciente = async (req, res) => {
     telefono,
     movil,
     fecha,
-    eps,
-    usuario,
-    password,
+    eps
   ]);
 
   return res.send({status:"Ok",
@@ -76,7 +74,7 @@ return res.send({status:"Ok",message:"Se ha eliminado correctamente"})
 
 export const crearPaciente = async (req, res) => {
   try{
-
+let id = req.params.id;
 let name = req.params.name;
 let apellido = req.params.apellido;
 let email = req.params.email;
@@ -84,11 +82,12 @@ let telefono = req.params.telefono;
 let movil = req.params.movil;
 let fecha = req.params.fecha;
 let eps = req.params.eps;
-let usuario = req.params.usuario;
-let password = bcrypt.hashSync(req.params.pass, 0)
+let password = bcrypt.hashSync(req.params.password, 0)
+console.log(id,name,email,telefono,movil,eps,password)
 let sql = "Call crearPaciente(?,?,?,?,?,?,?,?,?)";
 
 await connection.query(sql, [
+  
   name,
   apellido,
   email,
@@ -96,15 +95,16 @@ await connection.query(sql, [
   movil,
   fecha,
   eps,
-  usuario,
   password,
+  id
 ]);
 return res.send({status:'ok',message:"Paciente Creado"});
   }
   catch(error){
+    console.log(error)
     return res.send({
        status: error,
-       mensaje: "No se pudo crear paciente"
+       message: "No se pudo crear paciente"
      });
 
   }

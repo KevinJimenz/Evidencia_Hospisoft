@@ -136,7 +136,18 @@
                 <!-- Begin Page Content -->
             <div class="container">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3"></div>
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h1 class="">Doctores</h1>
+                                </div>
+    
+                                <div class="col-6 d-flex justify-content-end">
+                                   <button class="btn btn-primary" id="btnCrear" style="margin-right: 4rem;">Agregar Doctor</button>
+                                </div>
+
+                            </div>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="tabla" class="table table-striped" style="width:100%">
@@ -151,38 +162,10 @@
                                             <th class="bg-danger text-light text-center">Delete</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="datos">
+                                    <tbody id="tbody">
                                        
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="card shadow mb-4" id="form" style="visibility: hidden;">
-                        <div class="card-header py-3"></div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <form >
-                                    <input type="text" class="form-control" style="visibility: hidden;" id="id" aria-describedby="emailHelp">
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1"  class="form-label">Nombre</label>
-                                      <input type="text" class="form-control"  id="name" aria-describedby="emailHelp">
-                                    </div>
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Apellido</label>
-                                      <input type="text" class="form-control" id="lastname" aria-describedby="emailHelp">
-                                    </div>  
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Email</label>
-                                      <input type="text" class="form-control" id="email" aria-describedby="emailHelp">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Especialidad</label>
-                                        <input type="text" class="form-control" id="especialidad" aria-describedby="emailHelp">
-                                    </div> 
-                                  <button type="button" id="btnEditarDoctor"  class="btn btn-success">Edit</button>
-                              </form>
                             </div>
                         </div>
                     </div>
@@ -190,6 +173,42 @@
   
             </div>
             <!-- End of Main Content -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                      <button type="button"  class="btn-close" onclick="cerrarModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="dialog" id="formDoctor">
+                        
+                            <input type="text" class="form-control" style="visibility: hidden;" id="idDoctor" aria-describedby="emailHelp">
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1"  class="form-label">Nombre</label>
+                              <input  required type="text" class="form-control"  id="nombre" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Apellido</label>
+                              <input  required type="text" class="form-control" id="apellido" aria-describedby="emailHelp">
+                            </div>  
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Email</label>
+                              <input  required type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Especialidad</label>
+                                <input required type="text" class="form-control" id="especialidad" aria-describedby="emailHelp">
+                            </div> 
+                  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btn" class="btn btn-success"></button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -255,9 +274,9 @@
     <script src="../../../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="../../../dist/js/datatables-demo.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-to-blob/4.1.0/canvas-to-blob.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="doctores.js"></script>
 </body>
 

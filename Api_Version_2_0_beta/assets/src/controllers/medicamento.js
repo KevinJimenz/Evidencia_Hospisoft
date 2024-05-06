@@ -9,10 +9,7 @@ export const listarMedicamentos = async (req, res) => {
       mensaje: "No hay registros",
     });
   }
-  return res.send({
-    status: "ok",
-    data: filas,
-  });
+  return res.send(filas);
 }; // ? listo
 export const eliminarMedicamento = async (req, res) => {
   try{
@@ -30,12 +27,14 @@ return res.send({ status: "error", message: "Error al eliminar medicamento" });
 
 export const editarMedicamento = async (req, res) => {
   try {
+    let id = req.params.id;
     let descripcion = req.params.descripcion;
     let existencia = req.params.existencia;
     let sql = "Call editarMedicamento(?,?,?)";
     await connection.query(sql, [id, descripcion, existencia]);
     return res.send({ status: "Ok", message: "Medicamento editado" }); 
   } catch (error) {
+    console.log(error)
     return res.send({
       status: "error",
       message: "Error al editar medicamento",
@@ -47,8 +46,9 @@ export const editarMedicamento = async (req, res) => {
 export const crearMedicamento = async (req, res) => {
   try {
     let descripcion = req.params.descripcion;
-    let sql = "Call crearMedicamento(?)";
-    await connection.query(sql, [descripcion]);
+    let stock = req.params.stock;
+    let sql = "Call crearMedicamento(?,?)";
+    await connection.query(sql, [descripcion, stock]);
     return res.send({ status: "Ok", message: "Medicamento Creado" }); 
   } catch (error) {
 

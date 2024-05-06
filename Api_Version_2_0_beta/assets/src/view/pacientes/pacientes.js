@@ -1,142 +1,252 @@
-var elementoVisible = true;
-let toggle = document.getElementById('sidebarToggle')
-toggle.addEventListener('click',()=>{
+let tbody = document.getElementById('tbody');
+let btnCrear = document.getElementById('btnCrear');
+let id = document.getElementById('idPaciente');
+let nombre = document.getElementById('nombre');
+let lastname = document.getElementById('apellido');
+let email = document.getElementById('email');
+let telefono = document.getElementById('telefono');
+let movil = document.getElementById('movil');
+let fecha = document.getElementById('fecha');
+let eps = document.getElementById('eps');
+let pass = document.getElementById('pass');
+let inputPass = document.getElementById('inputPass');
+let formPaciente = document.getElementById('formPaciente');
+let title = document.getElementById('exampleModalLabel');
+let btn = document.getElementById('btn');
 
-  let title = document.getElementById('title')
-  if (elementoVisible) {
-      // Si el elemento está visible, ocultarlo
-      title.style.visibility = 'hidden';
-  } else {
-      // Si el elemento está oculto, mostrarlo
-      title.style.visibility = 'visible';
-  }
-  
-  // Invertir el estado de visibilidad para la próxima vez que se haga clic
-  elementoVisible = !elementoVisible;
-})
-var tabla = new DataTable( '#tabla', {
+const formData = new FormData();
 
-} );
-// ? Cargo los doctores en la tabla 
-fetch('http://localhost:3000/paciente/mostrarPacientes')
-.then((response)=>{
-return response.json()
-})
-.then((response)=>{
-tabla.clear().draw();
-// ? Trae los datos que se van a pintar en la tabla
-response.forEach(row => { 
-   tabla.row.add([
-        row.idPaciente,
-        row.nombrePaciente,
-        row.apellidoPaciente,
-        row.emailPaciente,
-        row.telefonoPaciente,
-        row.movilPaciente,
-        row.fechaNacimiento,
-        row.epsPaciente,
-        row.usuarioPaciente,
-       `<button type="button" id="btnEditar"  class="bi bi-pencil btn btn-primary"></button>`,
-       `<button type="button" id="btnEliminar" class="bi bi-trash btn btn-danger"></button>`
-   ]).draw();
-});
-}) 
-let form = document.getElementById('form')
-// ? boton Editar del formulario
 
-// ? boton Editar de la tabla
-$('#tabla tbody').on('click', '#btnEditar', function() {
-// Obtener la fila correspondiente a este botón
-var fila = $(this).closest('tr');
-// Obtener los datos de la fila
-var data = tabla.row(fila).data();
+const modalPaciente = new bootstrap.Modal(
+  document.getElementById("exampleModal"),
+);
+var opcion = "";
 
-capturoDatos(data[0],data[1],data[2],data[3],data[4],data[5],data[6],data[7])
 
-form.style.visibility = "visible"
-});
-// ? Funcion que captura los datos de la fila seleccionada 
-// ? y los pinta en el formulario 
-function capturoDatos(idPaciente,nombrePaciente,apellidoPaciente,emailPaciente,telefonoPaciente,movilPaciente,fechaNacimiento,epsPaciente){
-document.getElementById('id').value = idPaciente
-document.getElementById('name').value = nombrePaciente
-document.getElementById('lastname').value = apellidoPaciente
-document.getElementById('email').value = emailPaciente
-document.getElementById('telefono').value = telefonoPaciente
-document.getElementById('movil').value = movilPaciente
-var fecha = new Date(fechaNacimiento);
-var formattedFecha = fecha.toISOString().slice(0,10);
-document.getElementById('date').value = formattedFecha
-document.getElementById('eps').value = epsPaciente
-let user =  document.getElementById('user')
-fetch(`http://localhost:3000/usuario/MostrarUsuarios`)
-.then((response)=>{
-  return response.json()
-})
-.then((response)=>{
-  response.forEach(row=>{
-    let option = ` <option value="${row.idUser}">${row.userName}</option>`
-    user.innerHTML += option
-  })
-})
+const cerrarModal = () =>{
+  modalPaciente.hide();
 }
-// ? boton Eliminar de la tabla
-$('#tabla tbody').on('click', '#btnEliminar', function() {
-// Obtener la fila correspondiente a este botón
-var fila = $(this).closest('tr');
-// Elimina de la base de datos
-// Obtener los datos de la fila
-var data = tabla.row(fila).data();
-let idPaciente = data[0];
-fetch(`http://localhost:3000/paciente/eliminarPaciente/${idPaciente}`)
-// Eliminar la fila de la tabla
-tabla.row(fila).remove().draw();
-});
-let user =  document.getElementById('user')
-var option ;
-let UsuarioElegido
-user.addEventListener('change', function(){
-   option = user.options[user.selectedIndex]
-  UsuarioElegido = option.value
-})
-let btnEditarDoctor = document.getElementById('btnEditarDoctor');
-btnEditarDoctor.addEventListener('click', ()=>{
-  
- let id = document.getElementById('id').value
- let name = document.getElementById('name').value 
- let lastname = document.getElementById('lastname').value 
- let email =  document.getElementById('email').value 
- let telefono = document.getElementById('telefono').value 
- let movil = document.getElementById('movil').value
- let date = document.getElementById('date').value 
- let eps = document.getElementById('eps').value 
- let idUsuario =  UsuarioElegido
- form.style.visibility = "hidden"
 
-fetch(`http://localhost:3000/paciente/editarPaciente/${id}/${name}/${lastname}/${email}/${telefono}/${movil}/${date}/${eps}/${idUsuario}`)
-// ? Cargo los doctores en la tabla 
-fetch('http://localhost:3000/paciente/mostrarPacientes')
-.then((response)=>{
-return response.json()
-})
-.then((response)=>{
-tabla.clear().draw();
-// ? Trae los datos que se van a pintar en la tabla
-response.forEach(row => { 
-   tabla.row.add([
-    row.idPaciente,
-    row.nombrePaciente,
-    row.apellidoPaciente,
-    row.emailPaciente,
-    row.telefonoPaciente,
-    row.movilPaciente,
-    row.fechaNacimiento,
-    row.epsPaciente,
-    row.usuarioPaciente,
-       `<button type="button" id="btnEditar"  class="bi bi-pencil btn btn-primary"></button>`,
-       `<button type="button" id="btnEliminar" class="bi bi-trash btn btn-danger"></button>`
-   ]).draw();
+btnCrear.addEventListener("click", () => {
+
+  id.value = "";
+  nombre.value = "";
+  apellido.value = "";
+  email.value = "";
+  telefono.value = "";
+  movil.value = "";
+  fecha.value = "";
+  eps.value = "";
+  pass.value = "";
+  inputPass.hidden = false;
+  id.removeAttribute("readonly");
+  title.textContent = "Agregar Paciente" 
+ btn.textContent = "Agregar"
+  modalPaciente.show();
+  opcion = "crear";
 });
-}) 
-})
+
+// evento requerido para seleccionar valores de una fila de tabla
+
+const on = (element, event, selector, handler) => {
+  element.addEventListener(event, (e) => {
+    if (e.target.closest(selector)) {
+      handler(e);
+    }
+  });
+};
+
+//PROCEDIMIENTO LISTAR TODOS LOS REGISTROS
+const listarPacientes = () => {
+  fetch("http://localhost:3000/pacientes/listar")
+    .then((response) => {
+      return response.json();
+      
+    })
+    .then((datos) => {
+      console.log(datos)
+      datos[0].forEach(element => {
+        let nacimiento = element.fechaNacimiento.slice(0,10)
+        let fila = `<tr>
+        <td class="text-center">${element.idPaciente}</td>
+        <td class="text-center">${element.nombrePaciente}</td>
+          <td class="text-center">${element.apellidoPaciente}</td>
+          <td class="text-center">${element.emailPaciente}</td>
+          <td class="text-center">${element.telefonoPaciente}</td>
+          <td class="text-center">${element.movilPaciente}</td>
+          <td class="text-center">${nacimiento}</td>
+          <td class="text-center">${element.epsPaciente}</td>
+        
+          <td class="text-center"><button class="btnEditar btn btn-primary btn-sm">Editar</button></td>
+          <td class="text-center"><button class="btnBorrar btn btn-danger btn-sm">Borrar</button></td>
+          </tr>`;
+        tbody.innerHTML += fila;
+      });
+      
+    })
+    .catch((error) =>{
+      Swal.fire({
+        icon: "error",
+        title: "No es posible conectarse a la API",
+        text: error,
+      });
+    })
+    
+};
+listarPacientes();
+
+
+on(document, "click", ".btnBorrar", (e) => {
+  let fila = e.target.parentNode.parentNode;
+  //const id = fila.firstElementChild.innerHTML;
+  let id = fila.children[0].innerHTML;
+  console.log(id)
+  Swal.fire({
+    title: "Seguro que desea borrar el Id: "+id+" ? " ,
+     text: "Se borrara de la base de datos !!!", 
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Si, estoy seguro !",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      fetch("http://localhost:3000/pacientes/eliminar/"+id, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then(() => location.reload());
+    }
+  });
+});
+
+//PROCEDIMIENTO EDITAR
+on(document, "click", ".btnEditar", (e) => {
+  let fila = e.target.parentNode.parentNode;
+  //const id = fila.firstElementChild.innerHTML; //otra forma deinvocar el valor de la fila
+  //valores de la fila
+
+  
+  let idPaciente = fila.children[0].innerHTML;
+  let nombrePaciente = fila.children[1].innerHTML;
+  let apellidoPaciente = fila.children[2].innerHTML;
+  let emailPaciente = fila.children[3].innerHTML;
+  let telefonoPaciente = fila.children[4].innerHTML;
+  let movilPaciente = fila.children[5].innerHTML;
+  let fechaNacimiento = fila.children[6].innerHTML;
+  let epsPaciente = fila.children[7].innerHTML;
+ 
+
+
+ 
+
+ id.value = idPaciente
+ nombre.value = nombrePaciente
+ lastname.value = apellidoPaciente
+ email.value = emailPaciente
+ telefono.value = telefonoPaciente
+ movil.value = movilPaciente
+ fecha.value = fechaNacimiento
+ eps.value = epsPaciente
+ inputPass.hidden = true;
+ id.setAttribute("readonly", "readonly");
+ 
+ 
+ title.textContent = "Editar Paciente" 
+ btn.textContent = "Editar"
+ 
+
+  opcion = "editar";
+  modalPaciente.show();
+  
+  
+});
+
+
+const actualizar = () => {
+  
+  
+    fetch(
+      "http://localhost:3000/pacientes/editar/" +
+        id.value +
+        "/" +
+        nombre.value +
+        "/" +
+        lastname.value +
+        "/" +
+        email.value +
+        "/" +
+        telefono.value +
+        "/" +
+        movil.value +
+        "/" +
+        fecha.value +
+        "/" +
+        eps.value +
+       
+        "" , {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (Object.keys(res).length === 0) {
+        } else {
+          Swal.fire({
+            title: res.message,
+
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "pacientes.html";
+            }
+          });
+        }
+      });
+
+  }
+
+
+// GUARDAR EL FORMULARIO
+
+formPaciente.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (opcion == "crear") {
+
+        fetch("http://localhost:3000/pacientes/crear/"+id.value+"/"+nombre.value+"/"+lastname.value+"/"+email.value+"/"+telefono.value+"/"+movil.value+"/"+fecha.value+"/"+eps.value+"/"+pass.value+"",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res);
+
+            if (Object.keys(res).length === 0) {
+            } else {
+              Swal.fire({
+                title: res.message,
+
+                confirmButtonText: "OK",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href = "pacientes.html";
+                }
+              });
+            }
+          });
+ 
+  }
+
+  if (opcion == "editar") {
+    actualizar();
+  }
+  modalPaciente.hide();
+});
 
