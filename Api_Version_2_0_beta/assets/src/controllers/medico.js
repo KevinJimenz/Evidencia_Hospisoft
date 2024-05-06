@@ -1,19 +1,16 @@
 import { connection } from "../models/data.js";
 export const mostrarMedicos = async (req, res) => {
-  let sql = "CALL listaMedicos";
+  let sql = "Call listaMedicos";
   let [filas] = await connection.query(sql);
-  if ([!filas]) {
-    res.status(400).send({
+  if (!filas) {
+    console.log(filas)
+    return res.send({
       status: "error",
       message: "Error al Mostrar Medicos",
     });
-  } else {
-    res.status(200).send({
-      status: "success",
-      message: "Medicos Mostrados Correctamente",
-      data: filas,
-    });
   }
+   return res.send(filas);
+    
 };// ? listo
 export const mostrarMedicoId = async (req, res) => {
   let idMedico = req.params.idMedico;

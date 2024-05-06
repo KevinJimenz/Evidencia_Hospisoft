@@ -69,10 +69,7 @@ export const mostrarCitas = async (req, res) => {
       message: "No hay citas registradas",
     });
   }
-  return res.send({
-    status: "success",
-    data: filas,
-  });
+  return res.send(filas)
 }; // ? listo
 export const verificarCita = async (req, res) => {
   let horaInicio = req.params.horaInicio;
@@ -80,16 +77,18 @@ export const verificarCita = async (req, res) => {
   let fecha = req.params.fecha;
   let sql = "Call verificarCita(?,?,?)";
   let [filas] = await connection.query(sql, [horaInicio, horaFin, fecha]);
-  if (!filas) {
+  if (filas[0].length==0) {
+    
     return res.send({
       status: "error",
       message: "No hay citas registradas",
     });
   }
-  return res.send({
-    status: "success",
-    data: filas,
-  });
+  else{
+    return res.send(filas); 
+  }
+  
+  
 }; // ? listo
 export const crearCita = async (req, res) => {
   try {
@@ -131,7 +130,7 @@ export const editarCita = async (req, res) => {
     let idMedico = req.params.idMedico;
     let horaInicio = req.params.horaInicio;
     let horaFin = req.params.horaFin;
-    let sql = "Call editarCitas(?,?,?,?,?,?,?,?,?)";
+    let sql = "Call editarCitas(?,?,?,?,?,?,?,?)";
     await connection.query(sql, [
       idCita,
       descripcion,
@@ -148,7 +147,7 @@ export const editarCita = async (req, res) => {
     });
   } catch (error) {
     res.send({
-      status: "400",
+      status: error,
       message: "Error al editar la cita",
     });
   }

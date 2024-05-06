@@ -136,7 +136,20 @@
                 <!-- Begin Page Content -->
             <div class="container">
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3"></div>
+                        <div class="card-header py-3 ">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h1 class="">Citas</h1>
+                                </div>
+    
+                                <div class="col-6 d-flex justify-content-end">
+                                   <button class="btn btn-primary" id="btnCrear" style="margin-right: 4rem;">Agregar Cita</button>
+                                </div>
+
+                            </div>
+                            
+
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="tabla" class="table table-striped" style="width:100%">
@@ -154,7 +167,8 @@
                                             <th class="bg-danger text-light text-center">Delete</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="datos">
+                                    <tbody id="tbody">
+
                                    
                                     </tbody>
                                 </table>
@@ -162,55 +176,67 @@
                         </div>
                     </div>
 
-                    <div class="card shadow mb-4" id="form">
-                        <div class="card-header py-3"></div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <form method="dialog">
-                                    <input type="text" class="" style="visibility: hidden;" id="id" aria-describedby="emailHelp">
-                                    <input type="text" class="descripcion " style="visibility: hidden;" id="descripcion" aria-describedby="emailHelp">
-                                    <input type="text" class="direccion " style="visibility: hidden;" id="direccion" aria-describedby="emailHelp">
-                                    <input type="text" class="fecha " style="visibility: hidden;" id="fecha" aria-describedby="emailHelp">
-                                    <input type="text" class="horaInicio " style="visibility: hidden;" id="horaInicio" aria-describedby="emailHelp">
-                                    <input type="text" class="horaFin " style="visibility: hidden;" id="horaFin" aria-describedby="emailHelp">
-                                    <input type="text" style="visibility: hidden;" name="" id="pacienteInput"> 
-                                    <input type="text" style="visibility: hidden;" name="" id="medicoInput">                                       
-                                                                     
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1"  class="form-label">Description</label>
-                                      <input type="text" class="form-control"  id="descripcionForm" aria-describedby="emailHelp">
-                                    </div>
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Direccion</label>
-                                      <input type="text" class="form-control" id="direccionForm" aria-describedby="emailHelp">
-                                    </div>  
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label">Fecha</label>
-                                      <input type="date" class="form-control" id="fechaForm" aria-describedby="emailHelp">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Hora Inicio</label>
-                                        <input type="time" class="form-control" id="horaInicioForm" aria-describedby="emailHelp">
-                                    </div> 
-                                    
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">paciente</label>
-                                        <select class="form-select" aria-label="Default select example " id="selecPaciente">
-                                          
-                                          </select>
-                                    </div> 
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Medico</label>
-                                        <select class="form-select" aria-label="Default select example" id="selecMedico">
-                                           
-                                        </select>
-                                    </div> 
-                                  <button type="button" id="btnEditarDoctor"  class="btn btn-success">Edit</button>
-                              </form>
-                            </div>
-                        </div>
-                    </div>
             </div>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Cita</h1>
+                      <button type="button"  class="btn-close" onclick="cerrarModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="dialog" id="formCita">
+                            <div class="mb-3">
+                               
+                                <input hidden type="text"  id="idCita" aria-describedby="emailHelp">
+                              </div>
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Description</label>
+                              <input type="text" class="description form-control" id="des" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Direction</label>
+                              <input type="text" class="form-control" id="direction" aria-describedby="emailHelp">
+                            </div> 
+                             <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Fecha</label>
+                              <input type="date" class="form-control" id="date" aria-describedby="emailHelp">
+                            </div>
+                          
+                           
+                            <input  hidden type="time"  id="horaVieja" >
+                        
+                        
+                           
+                            <input  hidden type="date"  id="fechaVieja" >
+                      
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Hora Inicio</label>
+                          <input type="time" class="form-control" id="horaInicio" aria-describedby="emailHelp">
+                        </div>
+                            <div class="row">
+                                <div class="mb-3 col-6">
+                                    <label for="exampleInputEmail1" class="form-label">Person</label>
+                                    <Select class="person" id="person"> </Select>
+                                  </div>
+                                  <div class="mb-3 col-6">
+                                    <label for="exampleInputEmail1" class="form-label">Doctor</label>
+                                    <Select class="doctor" id="doctor"> </Select>
+                                  </div>
+                            </div>
+                       
+                          
+                         
+              
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btn" class="btn btn-success">Agregar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
   
             </div>
             <!-- End of Main Content -->
@@ -279,9 +305,10 @@
     <script src="../../../../vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="../../../dist/js/datatables-demo.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.0/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-to-blob/4.1.0/canvas-to-blob.min.js"></script>
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="citas.js"></script>
   
 </body>

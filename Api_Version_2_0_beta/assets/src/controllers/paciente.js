@@ -10,10 +10,7 @@ export const listarPacientes = async (req, res) => {
       mensaje: "No hay registros",
     });
   }
-  return res.send({
-    status: "ok",
-    data: filas,
-  });
+  return res.send(filas);
 
 }; // ? listo
 export const editarPaciente = async (req, res) => {
