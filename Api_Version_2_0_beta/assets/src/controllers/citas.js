@@ -3,31 +3,25 @@ import { connection } from "../models/data.js";
 export const pacientesAtendidosMes = async (req, res) => {
   let mes = req.params.mes;
   let sql = "Call pacientesAtendidosMes(?)";
-  let [filas] = await connection.query(sql, [mes]);
+  let [[filas]] = await connection.query(sql, [mes]);
   if (!filas) {
     return res.send({
       status: "error",
       message: "No hay registros de pacientes atendidos al mes",
     });
   }
-  return res.send({
-    status: "success",
-    data: filas,
-  });
+  return res.send(filas);
 }; // ? listo
 export const pacientesAtendidos = async (req, res) => {
   let sql = "Call pacientesAtentidos";
-  let [filas] = await connection.query(sql);
+  let [[filas]] = await connection.query(sql);
   if (!filas) {
     return res.send({
       status: "error",
       message: "No hay registros de pacientes atendidos",
     });
   }
-  return res.send({
-    status: "success",
-    data: filas,
-  });
+  return res.send(filas);
 }; // ? listo
 export const EliminarCita = async (req, res) => {
   try {

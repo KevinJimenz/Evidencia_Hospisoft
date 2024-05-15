@@ -1,4 +1,23 @@
-// Grafico 1 y Grafico 2
+/** 
+ * Ocultar Barra lateral y Mostrar
+ */
+var elementoVisible = true;
+let toggle = document.getElementById('sidebarToggle')
+toggle.addEventListener('click',()=>{
+
+    let title = document.getElementById('title')
+    if (elementoVisible) {
+        // Si el elemento está visible, ocultarlo
+        title.style.visibility = 'hidden';
+    } else {
+        // Si el elemento está oculto, mostrarlo
+        title.style.visibility = 'visible';
+    }
+    
+    // Invertir el estado de visibilidad para la próxima vez que se haga clic
+    elementoVisible = !elementoVisible;
+})
+// Grafico 1 Datos
   let EneroInicio = new Date("2024-01-01")
   let EneroFin= new Date("2024-01-31")
   let FebreroInicio = new Date("2024-02-01")
@@ -46,156 +65,87 @@
       return response.json();
   })
   .then((response)=>{
-
      response.map((value)=>{
-
       // Capturo la fecha de la base de datos
       fechaDB = value.fecha
       // Escojo 10 caracteres que son: año , mes y dia
       fecha = fechaDB.substring(0,10)
       // Convierto la cadena en fecha
       let nuevaFecha = new Date(fecha)
-      // Comparo
-      if(nuevaFecha >= EneroInicio && nuevaFecha<= EneroFin)
-      {
-          cont1++
-      }
-      if(nuevaFecha >= FebreroInicio && nuevaFecha<= FebreroFin)
-      {
-          cont2++
-        
-      }
-      if(nuevaFecha >= MarzoInicio && nuevaFecha<= MarzoFin)
-      {
-          cont3++
-      }
-      if(nuevaFecha >= AbrilInicio && nuevaFecha<= AbrilFin)
-      {
-          cont4++
-      }
-      if(nuevaFecha >= MayoInicio && nuevaFecha<= MayoFin)
-      {
-          cont5++
-      }
-      if(nuevaFecha >= JunioInicio && nuevaFecha<= JunioFin)
-      {
-          cont6++
-      }
-      if(nuevaFecha >= JulioInicio && nuevaFecha<= JulioFin)
-      {
-          cont7++
-      }
-      if(nuevaFecha >= AgostoInicio && nuevaFecha<= AgostoFin)
-      {
-          cont8++
-      }
-      if(nuevaFecha >= SeptiembreInicio && nuevaFecha<= SeptiembreFin)
-      {
-          cont9++
-      }
-      if(nuevaFecha >= OctubreInicio && nuevaFecha<= OctubreFin)
-      {
-          cont10++
-      }
-      if(nuevaFecha >= NoviembreInicio && nuevaFecha<= NoviembreFin)
-      {
-          cont11++
-      }
-      if(nuevaFecha >= DiciembreInicio && nuevaFecha<= DiciembreFin)
-      {
-          cont12++
-      }
-     })
-    if(cont1 > 0)
-    {
-        datosGrafico1.push(cont1)
-    }else{
-        datosGrafico1.push(0)
-    }
-    if(cont2 > 0)
-    {
-        datosGrafico1.push(cont2)
-    }else{
-        datosGrafico1.push(0)
-    }
-    if(cont3 > 0)
-    {
-        datosGrafico1.push(cont3)
-    }else{
-        datosGrafico1.push(0)
-    }
-    if(cont4 > 0)
-    {
-        datosGrafico1.push(cont4)
-    }else{
-        datosGrafico1.push(0)
-    }
-    if(cont5 > 0)
-    {
-        datosGrafico1.push(cont5)
-    }
-    else{
-        datosGrafico1.push(0)
-    }
-    if(cont6 > 0)
-    {
-        datosGrafico1.push(cont6)
-    }
-    else{
-        datosGrafico1.push(0)
-    }
-    if(cont7 > 0)
-    {
-        datosGrafico1.push(cont7)
-    }
-    else{
-        datosGrafico1.push(0)
-    }
-    if(cont8 > 0)
-    {
-        datosGrafico1.push(cont8)
-    }
-    else{
-        datosGrafico1.push(0)
-    }
-    if(cont9 > 0)
-    {
-        datosGrafico1.push(cont9)
-    }
-    else{
-        datosGrafico1.push(0)
-    }
-    if(cont10 > 0)
-    {
-        datosGrafico1.push(cont10)
-    }
-    else{
-        datosGrafico1.push(0)
-    }
-    if(cont11 > 0)
-    {
-        datosGrafico1.push(cont11)
-    }
-    else{
-        datosGrafico1.push(0)
-    }
-    if(cont12 > 0)
-    {
-        datosGrafico1.push(cont12)
-    }
-    else{
-        datosGrafico1.push(0)
-    }
+      // ? Comparo fechas con las que ya tengo en variables 
+      switch ( true ) {
+        case (nuevaFecha >= EneroInicio && nuevaFecha<= EneroFin):
+            cont1++ ;
+        break;
+        case (nuevaFecha >= FebreroInicio && nuevaFecha<= FebreroFin):
+            cont2++ ;
+        break;
+        case (nuevaFecha >= MarzoInicio && nuevaFecha<= MarzoFin):
+            cont3++ ;
+            break;
+        case (nuevaFecha >= AbrilInicio && nuevaFecha<= AbrilFin):
+            cont4++
+        break;
+        case (nuevaFecha >= MayoInicio && nuevaFecha<= MayoFin):
+            cont5++
+        break;
+        case (nuevaFecha >= JunioInicio && nuevaFecha<= JunioFin):
+            cont6++
+        break;
+        case (nuevaFecha >= JulioInicio && nuevaFecha<= JulioFin):
+            cont7++
+        break;
+        case (nuevaFecha >= AgostoInicio && nuevaFecha<= AgostoFin):
+            cont8++
+        break;
+        case (nuevaFecha >= SeptiembreInicio && nuevaFecha<= SeptiembreFin):
+            cont9++
+        break;
+        case (nuevaFecha >= OctubreInicio && nuevaFecha<= OctubreFin):
+            cont10++
+        break;
+        case (nuevaFecha >= NoviembreInicio && nuevaFecha<= NoviembreFin):
+            cont11++
+        break;
+        case (nuevaFecha >= DiciembreInicio && nuevaFecha<= DiciembreFin):
+            cont12++
+        break;
+      }})
+      // ? Valido si los contadores son mayores que 0
+      // ? Si no cumple con algun caso el valor por defecto sera 0
+      if( cont1 > 0 ) { datosGrafico1.push(cont1) }
+      else{ datosGrafico1.push(0) }
+      if( cont2 > 0 ) { datosGrafico1.push(cont2) }
+      else{ datosGrafico1.push(0) }
+      if( cont3 > 0 ) { datosGrafico1.push(cont3) }
+      else{ datosGrafico1.push(0) }
+      if( cont4 > 0 ) { datosGrafico1.push(cont4) }
+      else{ datosGrafico1.push(0) }
+      if( cont5 > 0 ) { datosGrafico1.push(cont5) }
+      else{ datosGrafico1.push(0) }
+      if( cont6 > 0 ) { datosGrafico1.push(cont6) }
+      else{ datosGrafico1.push(0) }
+      if( cont7 > 0 ) { datosGrafico1.push(cont7) }
+      else{ datosGrafico1.push(0) }
+      if( cont8 > 0 ) { datosGrafico1.push(cont8) }
+      else{ datosGrafico1.push(0) }
+      if( cont9 > 0 ) { datosGrafico1.push(cont9) }
+      else{ datosGrafico1.push(0) }
+      if( cont10 > 0 ) { datosGrafico1.push(cont10) }
+      else{ datosGrafico1.push(0) }
+      if( cont11 > 0 ) { datosGrafico1.push(cont11) }
+      else{ datosGrafico1.push(0) }
+      if( cont12 > 0 ) { datosGrafico1.push(cont12) }
+      else{ datosGrafico1.push(0) }
   })
   // --------------------------------------------- //
 
-  // Grafico 2 
+  // Grafico 2 datos
   let contenedorMes = document.getElementById('contenedorMes')
   let valores = []
   let medicos = []
   let selectMes = document.getElementById('selectMeses')
   selectMes.addEventListener('change',function(){
-   
     actulizarGrafica(chart2)
      var mes = selectMes.options[selectMes.selectedIndex]
      fetch(`http://localhost:3000/citas/medicos/pacientesAtendidos/${mes.value}`)
@@ -208,39 +158,23 @@
            valores.push(value.Total_Pacientes)
        })
      }) 
-     
   })
-
-  
-
   // --------------------------------------------- //
- 
   var validator = 0;
   var option ;
   // Canvas
   var ctx = document.getElementById('lineChart')
   let select = document.getElementById('select')
-  select.addEventListener('change',function(){
-    // Guardo la opcion que eligio
+  select.addEventListener('change', function() {
+    // ? Guardo la opcion que eligio
      option = select.options[select.selectedIndex]
-    // Valido cual fue la ultima seleccion y la elimino
-   if(validator == 1)
-   {
-    eliminarGrafico(chart1)
-    validator = 0;
-   }
-   if(validator == 2)
-   {
-    eliminarGrafico(chart2)
-    validator = 0;
-   }
-   if(validator == 3)
-   {
-    eliminarGrafico(chart3)
-    validator = 0;
-   }
-   
-    if(option.value == 1 )
+    // ? Valido cual fue la ultima seleccion y la elimino
+    // ? Y seteo el valor de la variable para un proxima vuelta
+   if( validator == 1 ) { eliminarGrafico(chart1) ; validator = 0 ; }
+   if( validator == 2 ) { eliminarGrafico(chart2) ; validator = 0 ; }
+   if( validator == 3 ) { eliminarGrafico(chart3) ; validator = 0 ; }
+   // ? Pinto las graficas 
+   if(option.value == 1 )
      {
         contenedorMes.style.visibility = 'hidden'
         chart1 = new Chart(ctx, {
@@ -262,25 +196,13 @@
                     ],
                     borderColor: 'black',
                     borderWidth: 1,
-                    data: [cont1,cont2,cont3,cont4,cont5,cont6,cont7,cont8,cont9,cont10,cont11,cont12],
-                    
+                    data: [cont1,cont2,cont3,cont4,cont5,cont6,cont7,cont8,cont9,cont10,cont11,cont12]
                 }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        type: 'realtime'
-                    }]
-                }
             }
-      
         });
-        /**
-         * Guardo un valor de acuerdo a la grafica que se muestra 
-         */
         validator = 1
      }
-     if(option.value == 2 )
+   if(option.value == 2 )
      {
       contenedorMes.style.visibility = 'Visible'
         chart2 = new Chart(ctx, {
@@ -308,7 +230,7 @@
            // guardo el valor de acuerdo a que grafica se esta mostrando
         validator = 2
      }
-     if(option.value == 3)
+   if(option.value == 3)
      {
         contenedorMes.style.visibility = 'hidden'
         chart3 = new Chart(ctx, {
@@ -347,47 +269,21 @@
      }
      
  })
-
 /**
  * 
  * Eliminar Grafica
  */
 function eliminarGrafico(grafico){
-    
     grafico.destroy()
 }
-
 /**
  * Actualizar Grafica
  */
 function actulizarGrafica(grafico){
-  
     grafico.data.labels.shift(); // Elimina el nombre mas antiguo
     grafico.data.datasets[0].data.shift(); // Eliminar el valor mas antiguo
     grafico.update() // actualiza la grafica
-  
 }
-
-/** 
- * Ocultar Barra lateral y Mostrar
- */
-var elementoVisible = true;
-let toggle = document.getElementById('sidebarToggle')
-toggle.addEventListener('click',()=>{
-
-    let title = document.getElementById('title')
-    if (elementoVisible) {
-        // Si el elemento está visible, ocultarlo
-        title.style.visibility = 'hidden';
-    } else {
-        // Si el elemento está oculto, mostrarlo
-        title.style.visibility = 'visible';
-    }
-    
-    // Invertir el estado de visibilidad para la próxima vez que se haga clic
-    elementoVisible = !elementoVisible;
-})
-
 /**
  * Descargar Graficas
  */
@@ -399,7 +295,6 @@ btnDescargar.addEventListener('click', ()=>{
        const values = [
         {x: chart1.data.labels, y: datosGrafico1}
        ];
-      
        /**
          * Creo un libro de Excel
          */
@@ -423,7 +318,6 @@ btnDescargar.addEventListener('click', ()=>{
         /**
          * Descargo el libro
          */
-     
         XLSX.writeFile(workbook, 'Datos_Grafico_1.xlsx')
     }
     if(graficaSelect == 2)
@@ -490,5 +384,4 @@ btnDescargar.addEventListener('click', ()=>{
          
             XLSX.writeFile(workbook, 'Datos_Grafico_3.xlsx')
     }
-    
 })

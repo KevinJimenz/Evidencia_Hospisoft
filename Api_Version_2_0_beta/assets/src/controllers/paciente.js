@@ -1,8 +1,8 @@
 import { connection } from "../models/data.js";
-import bcrypt from "bcrypt";
+import * as bcrypt from 'bcrypt';
 
 export const listarPacientes = async (req, res) => {
-  let sql = "Call listarPacientes"
+  let sql = "Call listarPacientes";
   let [filas] = await connection.query(sql);
   if (!filas) {
     return res.send({
@@ -11,7 +11,6 @@ export const listarPacientes = async (req, res) => {
     });
   }
   return res.send(filas);
-
 }; // ? listo
 export const editarPaciente = async (req, res) => {
   try{
@@ -23,9 +22,9 @@ export const editarPaciente = async (req, res) => {
   let movil = req.params.movil;
   let fecha = req.params.fecha;
   let eps = req.params.eps;
- 
-  
-  let sql = "Call editarPaciente(?,?,?,?,?,?,?,?)";
+  let usuario = req.params.usuario;
+  let password = bcrypt.hashSync(req.params.password, 10);
+  let sql = "Call editarPaciente(?,?,?,?,?,?,?,?,?,?)";
   await connection.query(sql, [
     id,
     name,
@@ -34,47 +33,39 @@ export const editarPaciente = async (req, res) => {
     telefono,
     movil,
     fecha,
-    eps
+    eps,
+    usuario,
+    password,
   ]);
 
-  return res.send({status:"Ok",
-  message:"Paciente editado"});
-
+    return res.send({ status: "Ok", message: "Paciente editado" });
+  } catch (error) {
+    return res.send({
+      status: "error",
+      mensaje: "No hay registros",
+    });
   }
-  catch(error){
- return res.send({
-   status: "error",
-   mensaje: "No hay registros",
- });
-
-
-  }
-}
+};
 
 // ? listo
 
 export const eliminarPaciente = async (req, res) => {
-  try{
-let id = req.params.id;
-let sql = "Call eliminarPaciente(?) ";
-await connection.query(sql, [id]);
-return res.send({status:"Ok",message:"Se ha eliminado correctamente"})
+  try {
+    let id = req.params.id;
+    let sql = "Call eliminarPaciente(?) ";
+    await connection.query(sql, [id]);
+    return res.send({ status: "Ok", message: "Se ha eliminado correctamente" });
+  } catch (error) {
+    return res.send({
+      status: error,
+      mensaje: "No hay registros",
+    });
   }
-  catch(error){
-  return res.send({
-    status: error,
-    mensaje: "No hay registros",
-  });
-
-  }
-  
-  
-
-};//? listo
+}; //? listo
 
 export const crearPaciente = async (req, res) => {
   try{
-let id = req.params.id;
+
 let name = req.params.name;
 let apellido = req.params.apellido;
 let email = req.params.email;
@@ -82,12 +73,11 @@ let telefono = req.params.telefono;
 let movil = req.params.movil;
 let fecha = req.params.fecha;
 let eps = req.params.eps;
+let usuario = req.params.usuario;
 let password = bcrypt.hashSync(req.params.password, 0)
-console.log(id,name,email,telefono,movil,eps,password)
 let sql = "Call crearPaciente(?,?,?,?,?,?,?,?,?)";
 
 await connection.query(sql, [
-  
   name,
   apellido,
   email,
@@ -95,63 +85,31 @@ await connection.query(sql, [
   movil,
   fecha,
   eps,
+  usuario,
   password,
-  id
 ]);
 return res.send({status:'ok',message:"Paciente Creado"});
   }
   catch(error){
-    console.log(error)
     return res.send({
        status: error,
-       message: "No se pudo crear paciente"
+       mensaje: "No se pudo crear paciente"
      });
 
   }
   
 };
-// falta por terminar 
-export const verificarPaciente = async (req,res)=>{
-  let sql = "CALL buscarCorreoPaciente(?)"
-  let passDatabase = ""
-  let correoVerificar = req.params.email
-  let pass = req.params.password;
-  let [array] = await connection.query(sql,[correoVerificar])
-  if(!array[0].length){
+// falta por terminar
+export const verificarPaciente = async (req, res) => {
+  let sql = "CALL buscarCorreoPaciente(?)";
+  let email = req.params.email;
+  let [[filas]] = await connection.query(sql, [email]);
+  if (!filas) {
     res.send({
-status: "error",
-message: "Correo no encontrado"
-    })
+      status: "error",
+      message: "Correo no encontrado",
+    });
+  } else {
+    res.send(filas);
   }
-  else{
-   
-    passDatabase = array[0][0]['passwordPaciente']
-
-     let pwd = bcrypt.compareSync(pass, passDatabase);
-     console.log(array)
-     console.log(pwd)
-     if(pwd){
-      
-  res.send({
-    status: "Ok",
-    message: "Ingreso correctamente",
-    idUser: array[0][0]["idPaciente"],
-    email: array[0][0]["emailPaciente"],
-    pass: array[0][0]["passwordPaciente"],
-  });
-     }
-     else{
-       
-      res.send({
-        status: 'error',
-        message: 'Opss ... Contraseña incorrecta'
-      })
-     }
-   
-    
-  }
-
-  
-
-}
-
+};

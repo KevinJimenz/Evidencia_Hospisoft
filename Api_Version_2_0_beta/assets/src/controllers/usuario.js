@@ -82,34 +82,39 @@ return res.send({ status: error, message: "Error al crear usuario" });
 };// ? listo
 
 export const verificarUsuario = async (req, res) => {
-  let sql = "CALL buscarCorrreoUsuario(?)";
-  let passDatabase = "";
+  let sql = "CALL buscarCorreoUsuario(?)";
   let correoVerificar = req.params.email;
-  let pass = req.params.pass;
-  let [array] = await connection.query(sql, [correoVerificar]);
-  if (!array[0].length) {
+  let [[array]] = await connection.query(sql, [correoVerificar]);
+  if (!array) {
     res.send({
       status: "error",
       message: "Correo no encontrado",
     });
   } else {
-    passDatabase = array[0][0]["password"];
-
-    let pwd = bcrypt.compareSync(pass, passDatabase);
- 
-    if (pwd) {
-      res.send({
-        status: "Ok",
-        message: "Ingreso correctamente",
-        idUser: array[0][0]["idUser"],
-        email: array[0][0]["emailUser"],
-        pass: array[0][0]["password"],
-      });
-    } else {
-      res.send({
-        status: "error",
-        message: "Opss ... Contraseña incorrecta",
-      });
-    }
+    let passwordDb = array[0].password;
+    let validar = bcrypt.compareSync(passwordDb,req.params.pass)
+    if ( validar )
+      {
+        return res.send(array)
+      }
+      else{
+        res.send({
+          status: "error",
+          message: "Password Incorrect",
+          data: array
+        });
+      }
+    
   }
 };
+
+export const traerUsuario = async (req,res) => {
+  let sql = "Call traerUsuario" ;
+  let [[filas]] = await connection.query(sql) ; 
+  if(!filas){
+    res.send({
+      status: "error"
+    });
+  }
+   return res.send(filas);
+  };

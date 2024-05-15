@@ -22,45 +22,66 @@
     <div class="contents order-2 order-md-1">
 
       <div class="container">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-md-7">
+        <div class="row justify-content-center">
+          <div class="col-md-10">
             <h2 style="color: #7AB730; font-weight:900; font-size: 32px; "><span style="color: black;  font-weight:500">Register To</span> <span style="color: black; " class="">HOSPI</span>SOFT</h2>
-            <p class="mb-4">Health and Care, Our Commitment to You: Always by Your Side, Always in Care.</p>
-
-            <form method="dialog">
-           
-              <div class="form-group first">
-                <label>Identification</label>
-                <input type="text" class="form-control" placeholder="C.C" id="id">
+            <p class="mb-3">Health and Care, Our Commitment to You: Always by Your Side, Always in Care.</p>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-2">
+                    <label>Nombres</label>
+                    <input type="text" style="height: 45px;" class="form-control" placeholder="Your Name" id="name">
+                  </div>
+                  <div class="mb-2">
+                    <label>Email</label>
+                    <input type="text" style="height: 45px;" class="form-control" placeholder="Example@gmail.com" id="email">
+                  </div>
+                  <div class="mb-2">
+                    <label>Movil</label>
+                    <input type="text" style="height: 45px;" class="form-control" placeholder="1234" id="movil">
+                  </div>
+                  <div class="mb-2">
+                    <label>EPS</label>
+                    <input type="text" style="height: 45px;" class="form-control"  placeholder="Barrios Unidos" id="eps">
+                  </div>
+               </div>
+               <div class="col-6">
+                  <div class="mb-2">
+                    <label>Apellidos</label>
+                    <input type="text" style="height: 45px;" class="form-control" placeholder="Your lastname" id="lastname">
+                  </div>
+                  <div class="mb-2">
+                    <label>Telefono</label>
+                    <input type="text" style="height: 45px;" class="form-control" placeholder="1234567890" id="tel">
+                  </div>
+                  <div class="mb-2">
+                    <label>Fecha Nacimiento</label>
+                    <input type="date" style="height: 45px;" class="form-control" placeholder="YourEmail@example.com" id="date">
+                  </div>
+                  <div class="mb-2">
+                    <label>Usuario quien registra al paciente</label>
+                    <select name="" style="width: 100% ; height: 45px;" id="user">
+                      <option value=""></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="mb-2">
+                    <label>Password</label>
+                    <input type="text" style="height: 45px;" class="form-control" placeholder="YourPassword123" id="password">
+                  </div>
+                </div>
               </div>
-            
-              <div class="form-group first">
-                <label for="username">Name</label>
-                <input type="text" class="form-control" placeholder="Your name" id="name">
-              </div>
-            
-              <div class="form-group first">
-                <label for="username">Email</label>
-                <input type="text" class="form-control" placeholder="YourEmail@example.com" id="email">
-              </div>
-              
-              <div class="form-group last mb-3">
-
-                <label>Password</label>
-                <input type="password" class="form-control"  placeholder="Pass" id="password">
-              </div>
-
              <div class="col-12 botones mt-4 ">
-              <button type="submit" style="background-color: #7AB730; border-color: #7AB730;" onclick="registro()" class="btn btn-block btn-primary">
-                Register
+              <button type="submit" style="background-color: #7AB730; width: 45%; border-color: #7AB730;" id="btnRegister" class="btn btn-block btn-primary">
+                Register to Patient
               </button>
-              <button type="submit" style="background-color: #7AB730; border-color: #7AB730;" id="btnLogin" class="btn btn-block btn-primary">
+              <button type="submit" style="background-color: #7AB730; width: 45%; border-color: #7AB730;" id="btnLogin" class="btn btn-block btn-primary">
                 Log In
               </button>
              </div>
-            </form>
-             <br>
-             <div class= "col-11 text-center">
+             <hr>
+             <div class= "col-12 text-center">
               <a style="color: blue;" href="../Index.html">Access our website</a>
              </div>
           </div>
